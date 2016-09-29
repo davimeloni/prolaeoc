@@ -7,6 +7,7 @@ public class Teste {
 		int inteiro = 1;
 		inteiro = inteiro + inteiro;
 		
+		System.out.println("test git");
 	}
 
 }
