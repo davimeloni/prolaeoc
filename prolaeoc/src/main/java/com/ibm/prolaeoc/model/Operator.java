@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +22,8 @@ public class Operator implements Serializable {
 	private String type;
 	private boolean enabled;
 	
-	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="SEQ_LAEOCOPERATOR", sequenceName="DMEZA.SEQ_LAEOCOPERATOR")
+	@Id @GeneratedValue(generator="SEQ_LAEOCOPERATOR", strategy=GenerationType.SEQUENCE)
 	public long getId() {
 		return id;
 	}
