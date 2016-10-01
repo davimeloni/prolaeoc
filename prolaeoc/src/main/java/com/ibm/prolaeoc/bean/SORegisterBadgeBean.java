@@ -15,8 +15,6 @@ public class SORegisterBadgeBean {
 	private Badge badge = new Badge();
 	private Location location;
 	private String stringLocation;
-	private DAO<Object> dao;
-	private BadgeRepository repository;
 
 	/*public void save_old() {
 		repository.add(this.badge);
@@ -29,7 +27,7 @@ public class SORegisterBadgeBean {
 	
 	public void save() {
 		System.out.println("saving badge " + this.badge.getName());
-		
+		this.badge.setStatus("Created");
 		new DAO<Badge>(Badge.class).add(this.badge);
 
 		this.badge = new Badge();

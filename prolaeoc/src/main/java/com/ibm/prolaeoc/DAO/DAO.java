@@ -71,12 +71,14 @@ public class DAO<T> {
 
 	public int countAll() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		long result = (Long) em.createQuery("select count(n) from livro n")
+		long result = (Long) em.createQuery("select count(n) from badge n")
 				.getSingleResult();
 		em.close();
 
 		return (int) result;
 	}
+	
+	
 
 	public List<T> listaTodosPaginada(int firstResult, int maxResults) {
 		EntityManager em = new JPAUtil().getEntityManager();
@@ -85,6 +87,17 @@ public class DAO<T> {
 
 		List<T> list = em.createQuery(query).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
+
+		em.close();
+		return list;
+	}
+	
+	public List<T> listAllLocations() {
+		EntityManager em = new JPAUtil().getEntityManager();
+		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+		query.select(query.from(classe));
+
+		List<T> list = em.createQuery(query).getResultList();
 
 		em.close();
 		return list;
