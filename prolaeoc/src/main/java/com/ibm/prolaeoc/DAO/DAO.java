@@ -13,21 +13,21 @@ public class DAO<T> {
 		this.classe = classe;
 	}
 
-	public void adiciona(T t) {
+	public void add(T t) {
 
-		// consegue a entity manager
+		// enable the entity manager
 		EntityManager em = new JPAUtil().getEntityManager();
 
-		// abre transacao
+		// open transaction
 		em.getTransaction().begin();
 
-		// persiste o objeto
+		// persist the object
 		em.persist(t);
 
-		// commita a transacao
+		// commit the transaction
 		em.getTransaction().commit();
 
-		// fecha a entity manager
+		// close the entity manager
 		em.close();
 	}
 
@@ -41,7 +41,7 @@ public class DAO<T> {
 		em.close();
 	}
 
-	public void atualiza(T t) {
+	public void update(T t) {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 
@@ -51,25 +51,25 @@ public class DAO<T> {
 		em.close();
 	}
 
-	public List<T> listaTodos() {
+	public List<T> listAll() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 
-		List<T> lista = em.createQuery(query).getResultList();
+		List<T> list = em.createQuery(query).getResultList();
 
 		em.close();
-		return lista;
+		return list;
 	}
 
-	public T buscaPorId(Integer id) {
+	public T searchForId(Integer id) {
 		EntityManager em = new JPAUtil().getEntityManager();
-		T instancia = em.find(classe, id);
+		T instance = em.find(classe, id);
 		em.close();
-		return instancia;
+		return instance;
 	}
 
-	public int contaTodos() {
+	public int countAll() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		long result = (Long) em.createQuery("select count(n) from livro n")
 				.getSingleResult();
@@ -83,11 +83,11 @@ public class DAO<T> {
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 
-		List<T> lista = em.createQuery(query).setFirstResult(firstResult)
+		List<T> list = em.createQuery(query).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 
 		em.close();
-		return lista;
+		return list;
 	}
 
 }

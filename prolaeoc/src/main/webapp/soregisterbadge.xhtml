@@ -23,6 +23,27 @@
 				<p:inputText size="12" value="#{registerbadgebean.badge.serial}"
 					id="serial">
 				</p:inputText>
+				
+				<p:outputLabel value="Pin" for="pin" />
+				<p:inputText size="12" value="#{registerbadgebean.badge.pin}"
+					id="pin">
+				</p:inputText>
+				
+				<p:outputLabel value="Location" for="location" />
+				<p:selectOneMenu value="#{registerbadgebean.badge.location}"
+					id="location" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Select location" noSelectionOption="true" />
+					<f:selectItems value="#{registerbadgebean.location}"
+						var="location" itemValue="#{location}" itemLabel="#{location.description}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Work Location" for="workLocation" />
+				<p:selectOneMenu value="#{registerbadgebean.badge.location}"
+					id="workLocation" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Select location" noSelectionOption="true" />
+					<f:selectItems value="#{registerbadgebean.location}"
+						var="workLocation" itemValue="#{location}" itemLabel="#{location.description}" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Creation Date" for="creationDate" />
 				<p:calendar size="12"
