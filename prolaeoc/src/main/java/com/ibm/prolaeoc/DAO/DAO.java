@@ -3,7 +3,13 @@ package com.ibm.prolaeoc.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.websocket.Session;
+
+import org.hibernate.Query;
+
+import com.ibm.prolaeoc.model.Badge;
 
 public class DAO<T> {
 
@@ -55,7 +61,8 @@ public class DAO<T> {
 		EntityManager em = new JPAUtil().getEntityManager();
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
-
+	
+		
 		List<T> list = em.createQuery(query).getResultList();
 
 		em.close();
@@ -71,7 +78,7 @@ public class DAO<T> {
 
 	public int countAll() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		long result = (Long) em.createQuery("select count(n) from badge n")
+		long result = (Long) em.createQuery("select count(n) from Badge n")
 				.getSingleResult();
 		em.close();
 
@@ -92,15 +99,21 @@ public class DAO<T> {
 		return list;
 	}
 	
-	public List<T> listAllLocations() {
+	public List<Badge> listCreated() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
-		query.select(query.from(classe));
-
-		List<T> list = em.createQuery(query).getResultList();
-
-		em.close();
-		return list;
+		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus", Badge.class);
+		query.setParameter("pstatus", "Created");
+		
+		return query.getResultList();
+	}
+	
+	public List<Badge> listHandbag(String location) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus and location=:plocation", Badge.class);
+		query.setParameter("pstatus", "Created");
+		query.setParameter("plocation", location);
+		
+		return query.getResultList();
 	}
 
 }

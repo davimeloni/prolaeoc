@@ -25,14 +25,14 @@ public class Badge implements Serializable{
 	private String name;
 	private long serial;
 	private long pin;
-	private Location location;
-	private Location work_location;
+	private String location;
+	private String work_location;
 	private Date creation_date;
 	private Date send_date;
 	private Date reception_date;
 	private Date received_date;
 	
-	private Handbag handbag;
+	private String handbag;
 	private Operator operator;
 	
 	private String status;
@@ -75,23 +75,7 @@ public class Badge implements Serializable{
 		this.pin = pin;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	public Location getLocation() {
-		return location;
-	}
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-	
-	@Enumerated(EnumType.STRING)
-	public Location getWork_location() {
-		return work_location;
-	}
-
-	public void setWork_location(Location work_location) {
-		this.work_location = work_location;
-	}
 	
 	@Temporal(TemporalType.DATE)
 	public Date getCreation_date() {
@@ -129,14 +113,6 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
-	public Handbag getHandbag() {
-		return handbag;
-	}
-
-	public void setHandbag(Handbag handbag) {
-		this.handbag = handbag;
-	}
-
 	public Operator getOperator() {
 		return operator;
 	}
@@ -159,6 +135,30 @@ public class Badge implements Serializable{
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getWork_location() {
+		return work_location;
+	}
+
+	public void setWork_location(String work_location) {
+		this.work_location = work_location;
+	}
+
+	public String getHandbag() {
+		return handbag;
+	}
+
+	public void setHandbag(String handbag) {
+		this.handbag = handbag;
 	}
 	
 	
