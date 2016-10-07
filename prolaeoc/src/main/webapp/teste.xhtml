@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<head>
-<title>Insert title here</title>
-</head>
-<body>
-	<p:button>teste</p:button>
-</body>
-</html>
+
+	<f:metadata>
+		<f:viewParam name="location" value="#{sendhandbagbean.location}" />
+		<f:viewAction action="#{sendhandbagbean.listToHandbag}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Handbag</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Edit and Send Handbag</h1>
+		<h:form id="frm">
+
+			<p:outputLabel value="Handbag Number: " for="handbag" />
+			<p:inputText size="12"
+				value="#{sendhandbagbean.handbag.handbag_number}" id="handbag">
+			</p:inputText>
+			<p:separator />
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<p:dataTable value="#{sendhandbagbean.badges}" var="badge" border="1"
+				cellspacing="0" cellpading="2" paginator="true" rows="10"
+				paginatorPosition="bottom">
+				<p:column headerText="Location" sortBy="{badge.location}">
+					<h:outputText value="#{badge.location}" />
+				</p:column>
+				<p:column headerText="Serial" sortBy="{badge.serial}">
+					<h:outputText value="#{badge.serial}" />
+				</p:column>
+				<p:column headerText="Name" sortBy="#{badge.name}">
+					<h:outputText value="#{badge.name}" />
+				</p:column>
+				<p:column>
+           <p:checkbox for="#{badge}" onchange="#{sendhandbagbean.isBadgeChecked}" ></p:checkbox>
+				</p:column>
+			</p:dataTable>
+			<p:separator />
+			<p:commandButton value="Submit"
+				action="#{sendhandbagbean.sendHandbag}">
+			</p:commandButton>
+			
+			<p:selectManyCheckbox >
+				<p:column></p:column>
+			</p:selectManyCheckbox>
+		</h:form>
+	</ui:define>
+</ui:composition>

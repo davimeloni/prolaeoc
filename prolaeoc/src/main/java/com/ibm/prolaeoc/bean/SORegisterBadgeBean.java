@@ -15,7 +15,8 @@ public class SORegisterBadgeBean {
 	private Badge badge = new Badge();
 	private Location location;
 	private String stringLocation;
-
+	
+	
 	/*public void save_old() {
 		repository.add(this.badge);
 		badge = new Badge();
@@ -25,6 +26,7 @@ public class SORegisterBadgeBean {
 
 	}*/
 	
+
 	public void save() {
 		System.out.println("saving badge " + this.badge.getName());
 		this.badge.setStatus("Created");

@@ -99,9 +99,9 @@ public class DAO<T> {
 		return list;
 	}
 	
-	public List<Badge> listCreated() {
+	public List<String> listCreated() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus", Badge.class);
+		TypedQuery<String> query = em.createQuery("select location from Badge where status=:pstatus", String.class);
 		query.setParameter("pstatus", "Created");
 		
 		return query.getResultList();

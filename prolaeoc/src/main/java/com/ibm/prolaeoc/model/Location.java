@@ -1,10 +1,10 @@
 package com.ibm.prolaeoc.model;
 
 public enum Location {
-	HORTOLANDIA("Hortolandia"), 
-	TUTOIA("Tutoia"), 
-	RECIFE("Recife"), 
-	PASTEOUR("Pasteour");
+	HORTOLANDIA("HORTOLANDIA"), 
+	TUTOIA("TUTOIA"), 
+	RECIFE("RECIFE"), 
+	PASTEOUR("PASTEOUR");
 	
 	private String description;
 

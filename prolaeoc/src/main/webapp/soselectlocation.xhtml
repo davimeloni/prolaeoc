@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-</body>
-</html>
+	<f:metadata>
+		<f:viewAction action="#{locationlistbean.getLocations}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Locations</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Select Location</h1>
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<p:dataList value="#{locationlistbean.locationBase}" var="location"
+				type="ordered">
+				<f:facet name="header">
+            Locations and amount
+        		</f:facet>
+				<p:link outcome="sosendhandbag?faces-redirect=true" value="#{location.key}, #{location.value}">
+					<f:param name="location" value="#{location.key}" />
+				</p:link>
+			</p:dataList>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
