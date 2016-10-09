@@ -85,20 +85,6 @@ public class DAO<T> {
 		return (int) result;
 	}
 	
-	
-
-	public List<T> listaTodosPaginada(int firstResult, int maxResults) {
-		EntityManager em = new JPAUtil().getEntityManager();
-		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
-		query.select(query.from(classe));
-
-		List<T> list = em.createQuery(query).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
-
-		em.close();
-		return list;
-	}
-	
 	public List<String> listCreated() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<String> query = em.createQuery("select location from Badge where status=:pstatus", String.class);
@@ -115,5 +101,14 @@ public class DAO<T> {
 		
 		return query.getResultList();
 	}
+	
+	public List<Badge> listReception(String handbag) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		TypedQuery<Badge> query = em.createQuery("from Badge where handbag=:phandbag", Badge.class);
+		query.setParameter("phandbag", handbag);
+		
+		return query.getResultList();
+	}
+
 
 }

@@ -3,6 +3,7 @@ package com.ibm.prolaeoc.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -113,6 +114,7 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
+	@Column(columnDefinition="varchar")
 	public Operator getOperator() {
 		return operator;
 	}
@@ -153,6 +155,7 @@ public class Badge implements Serializable{
 		this.work_location = work_location;
 	}
 
+	@Column(columnDefinition="varchar")
 	public String getHandbag() {
 		return handbag;
 	}

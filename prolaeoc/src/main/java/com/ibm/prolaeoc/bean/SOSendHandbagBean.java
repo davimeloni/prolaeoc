@@ -1,91 +1,77 @@
 package com.ibm.prolaeoc.bean;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+
+import org.primefaces.event.SelectEvent;
 
 import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.model.Badge;
 import com.ibm.prolaeoc.model.Handbag;
 
 @ManagedBean(name = "sendhandbagbean")
-public class SOSendHandbagBean {
+@SessionScoped
+public class SOSendHandbagBean implements Serializable {
 	
-	private Badge badge = new Badge();
+	private static final long serialVersionUID = 1L;
+	
+
 	private List<Badge> badges;
-	private List<Badge> badgesToHandbag;
-	private Handbag handbag = new Handbag();
-	private Date actualDate = new Date();
 	private String location;
-	private boolean checkBadge;
-	
-	
+	private List<Badge> selectedBadges;
+	private Badge[] selectedBadges2;
+	private Handbag handbag = new Handbag();
+	private DateFormat df = new SimpleDateFormat("dd/MM/yy");
+	private Date actualDate = new Date();
+
+
 	//list badges from location
+	@PostConstruct
 	public void listToHandbag() {
 		this.badges = new DAO<Badge>(Badge.class).listHandbag(this.location);
+		this.handbag = new Handbag();
 	}
 	
-	public void sendHandbag() {
+	public SOSendHandbagBean () {
 		
-		for (Badge b: badgesToHandbag) {
-			b.setStatus("Sent_To_Reception");
-			b.setHandbag(this.handbag.getHandbag_number());
+	}
+	
+	public void selectListener(SelectEvent event) {
+		System.out.println("check selection");
+	}
+	
+	public void sendHanbag () {
+		this.handbag.setCreation_date(actualDate);
+		
+		String s = this.handbag.getHandbag_number().substring(0);
+		System.out.println("x");
+		
+		for(Badge b: selectedBadges2) {
+			b.setHandbag(s);
+			b.setSend_date(actualDate);
+			b.setStatus("SentToReception");
+			System.out.println(b.getHandbag() + " | " + b.getSend_date());
 			new DAO<Badge>(Badge.class).update(b);
 		}
 		
-		this.handbag.getHandbag_number();
-		this.handbag.setCreation_date(actualDate);
 		new DAO<Handbag>(Handbag.class).add(this.handbag);
+		this.handbag = new Handbag();
 		
 	}
 	
 	
-	
-	//update badges checkeds ---- only when click submit
-	/*public void isBadgeChecked() {
-			this.badge.setStatus("Sent_To_Reception");
-			this.badge.setHandbag(this.handbag.getHandbag_number());
-			badgesToHandbag.add(this.badge);
-			System.out.println("badge of " + this.badge.getName() + " selected");
-	}*/
-	
-	
-	
-	//create report to print
-	public void createReportToPrint() {
-		
-	}
-	
-	
-	//delete badge
-	public void removeBadge() {
-		System.out.println("la la la");
-		new DAO<Badge>(Badge.class).remove(this.badge);
-		
-		this.listToHandbag();
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Badge deleted successfully!"));
-	}
-	
-	
-	
-	// getters and setters ---------------------------------------------
-	
-	public Badge getBadge() {
-		return badge;
-	}
-
-	public void setBadge(Badge badge) {
-		this.badge = badge;
-	}
 
 	public List<Badge> getBadges() {
 		return badges;
@@ -93,22 +79,6 @@ public class SOSendHandbagBean {
 
 	public void setBadges(List<Badge> badges) {
 		this.badges = badges;
-	}
-
-	public List<Badge> getBadgesToHandbag() {
-		return badgesToHandbag;
-	}
-
-	public void setBadgesToHandbag(List<Badge> badgesToHandbag) {
-		this.badgesToHandbag = badgesToHandbag;
-	}
-
-	public Handbag getHandbag() {
-		return handbag;
-	}
-
-	public void setHandbag(Handbag handbag) {
-		this.handbag = handbag;
 	}
 
 	public String getLocation() {
@@ -119,14 +89,44 @@ public class SOSendHandbagBean {
 		this.location = location;
 	}
 
-	public boolean isCheckBadge() {
-		return checkBadge;
+	public List<Badge> getSelectedBadges() {
+		return selectedBadges;
 	}
 
-	public void setCheckBadge(boolean checkBadge) {
-		this.checkBadge = checkBadge;
+	public void setSelectedBadges(List<Badge> selectedBadges) {
+		this.selectedBadges = selectedBadges;
 	}
-	
-	
-	
+
+	public Badge[] getSelectedBadges2() {
+		return selectedBadges2;
+	}
+
+	public void setSelectedBadges2(Badge[] selectedBadges2) {
+		this.selectedBadges2 = selectedBadges2;
+	}
+
+	public Handbag getHandbag() {
+		return handbag;
+	}
+
+	public void setHandbag(Handbag handbag) {
+		this.handbag = handbag;
+	}
+
+	public Date getActualDate() {
+		return actualDate;
+	}
+
+	public void setActualDate(Date actualDate) {
+		this.actualDate = actualDate;
+	}
+
+	public DateFormat getDf() {
+		return df;
+	}
+
+	public void setDf(DateFormat df) {
+		this.df = df;
+	}
+
 }

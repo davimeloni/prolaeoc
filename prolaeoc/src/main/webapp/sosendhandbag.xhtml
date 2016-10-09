@@ -14,39 +14,42 @@
 	<ui:define name="titulo">Handbag</ui:define>
 
 	<ui:define name="corpo">
-		<h1>Send Handbag</h1>
-		<h:form id="frm">
+		<h1>Edit and Send Handbag</h1>
+		<h:form id="tableForm">
 
 			<p:outputLabel value="Handbag Number: " for="handbag" />
 			<p:inputText size="12"
 				value="#{sendhandbagbean.handbag.handbag_number}" id="handbag">
 			</p:inputText>
+
 			<p:separator />
 
-			<p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
-			
-				<p:outputLabel for="handbaglist" value="Handbag List:" />
-						
-				<p:selectManyMenu id="handbaglist"
-					value="#{sendhandbagbean.badgesToHandbag}"
-					var="b" showCheckbox="true">
-					<f:selectItems value="#{sendhandbagbean.badges}" var="badge" itemLabel="#{badge.name}" itemValue="#{badge}" />
+			<p:dataTable id="hlist" var="badge" value="#{sendhandbagbean.badges}"
+				selection="#{sendhandbagbean.selectedBadges2}" rowKey="#{badge.id}">
+				<p:ajax event="rowSelectCheckbox" process="hlist"
+					listener="#{sendhandbagbean.selectListener}" />
+				<f:facet name="header">Badge List</f:facet>
 
-					<p:column headerText="Serial">
-						<h:outputText value="#{b.serial}" />
-					</p:column>
+				<p:column selectionMode="multiple" style="width:2%" />
 
-					<p:column headerText="Name">
-						<h:outputText value="#{b.name}" />
-					</p:column>
-					
-				</p:selectManyMenu>
-			</p:panelGrid>
-			
-			<p:separator/>
-			
-			<p:commandButton value="Send Handbag" ajax="false" action="#{sendhandbagbean.sendHandbag}" icon="ui-icon-check" />
-			<p:messages />
+				<!-- data columns here, working just fine -->
+				<p:column headerText="Location" sortBy="{badge.location}">
+					<h:outputText value="#{badge.location}" />
+				</p:column>
+				<p:column headerText="Serial" sortBy="{badge.serial}">
+					<h:outputText value="#{badge.serial}" />
+				</p:column>
+				<p:column headerText="Name" sortBy="#{badge.name}">
+					<h:outputText value="#{badge.name}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Select Badges" process="@form"
+						icon="ui-icon-trash" action="#{sendhandbagbean.sendHanbag()}">
+					</p:commandButton>
+				</f:facet>
+			</p:dataTable>
+
 		</h:form>
 	</ui:define>
 </ui:composition>

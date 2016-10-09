@@ -7,7 +7,6 @@ import javax.faces.context.FacesContext;
 import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.model.Badge;
 import com.ibm.prolaeoc.model.Location;
-import com.ibm.prolaeoc.repository.BadgeRepository;
 
 @ManagedBean(name="registerbadgebean")
 public class SORegisterBadgeBean {

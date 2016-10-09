@@ -47,7 +47,7 @@ public class TesteGit {
 		 * for (Badge b: badges) { System.out.println(b.getName()); }
 		 * 
 		 * System.out.println(date);
-		 */
+		 
 
 		List<String> locations = new DAO<String>(String.class).listCreated();
 		List<String> toPrint = new ArrayList<>();
@@ -55,9 +55,11 @@ public class TesteGit {
 		for (String temp : uniqueSet) {
 			String e = temp + ": " + Collections.frequency(locations, temp);
 			toPrint.add(e);
+		}*/
+		List<Badge> bb = new DAO<Badge>(Badge.class).listReception("lalala");
+		for(Badge b: bb) {
+			System.out.println(b.getHandbag()+ " " + b.getName());
 		}
-			System.out.println(toPrint);
-		
 	}
 
 }
