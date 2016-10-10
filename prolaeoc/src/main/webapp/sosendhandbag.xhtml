@@ -42,10 +42,18 @@
 				<p:column headerText="Name" sortBy="#{badge.name}">
 					<h:outputText value="#{badge.name}" />
 				</p:column>
+				<p:column headerText="Delete Badge">
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+						process="@this" update="@form"
+						action="#{sendhandbagbean.deleteBadge}">
+						<f:setPropertyActionListener value="#{badge}"
+							target="#{sendhandbagbean.badgeToDelete}" />
+					</p:commandButton>
+				</p:column>
 
 				<f:facet name="footer">
-					<p:commandButton value="Select Badges" process="@form"
-						icon="ui-icon-trash" action="#{sendhandbagbean.sendHanbag()}">
+					<p:commandButton value="Send Handbag"
+						icon="ui-icon-disk" action="#{sendhandbagbean.sendHanbag()}" update="@form" >
 					</p:commandButton>
 				</f:facet>
 			</p:dataTable>

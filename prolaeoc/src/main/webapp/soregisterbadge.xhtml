@@ -6,6 +6,10 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+	<f:metadata>
+		<f:viewAction action="#{registerbadgebean.generatePIN}" />
+	</f:metadata>
+
 	<ui:define name="titulo">Register Badge</ui:define>
 
 	<ui:define name="corpo">
@@ -51,7 +55,7 @@
 					pattern="dd/MM/yyyy" />
 
 				<p:commandButton value="Submit" action="#{registerbadgebean.save}"
-					icon="ui-icon-disk" />
+					icon="ui-icon-disk" update="@form" />
 
 			</p:panelGrid>
 		</h:form>

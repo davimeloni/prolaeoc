@@ -22,15 +22,16 @@ import com.ibm.prolaeoc.model.Badge;
 import com.ibm.prolaeoc.model.Handbag;
 
 @ManagedBean(name = "sendhandbagbean")
-@SessionScoped
+@ViewScoped
 public class SOSendHandbagBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 
 	private List<Badge> badges;
-	private String location;
+	private static String location;
 	private List<Badge> selectedBadges;
+	private Badge badgeToDelete = new Badge();
 	private Badge[] selectedBadges2;
 	private Handbag handbag = new Handbag();
 	private DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -40,18 +41,23 @@ public class SOSendHandbagBean implements Serializable {
 	//list badges from location
 	@PostConstruct
 	public void listToHandbag() {
-		this.badges = new DAO<Badge>(Badge.class).listHandbag(this.location);
-		this.handbag = new Handbag();
+		this.badges = new DAO<Badge>(Badge.class).listHandbag(SOSendHandbagBean.location);
+	
+		long seq = Long.parseLong(new DAO<String>(String.class).lastHandbagNumber().substring(5)) + 1;
+		this.handbag.setHandbag_number("LAEOC" + String.format("%05d", seq));
 	}
 	
+	//constructor
 	public SOSendHandbagBean () {
 		
 	}
 	
+	//check for selection event
 	public void selectListener(SelectEvent event) {
 		System.out.println("check selection");
 	}
 	
+	//send handbag, save atributes
 	public void sendHanbag () {
 		this.handbag.setCreation_date(actualDate);
 		
@@ -69,10 +75,23 @@ public class SOSendHandbagBean implements Serializable {
 		new DAO<Handbag>(Handbag.class).add(this.handbag);
 		this.handbag = new Handbag();
 		
+		this.badges = new DAO<Badge>(Badge.class).listHandbag(SOSendHandbagBean.location);
+		
+		long seq = Long.parseLong(new DAO<String>(String.class).lastHandbagNumber().substring(5)) + 1;
+		this.handbag.setHandbag_number("LAEOC" + String.format("%05d", seq));
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Handbag successfully saved"));
 	}
 	
+	//delete badge
+	public void deleteBadge() {
+		new DAO<Badge>(Badge.class).remove(this.badgeToDelete);
+		this.badges = new DAO<Badge>(Badge.class).listHandbag(SOSendHandbagBean.location);
+	}
 	
 
+	//--------------------- getters and setters ------------------------
 	public List<Badge> getBadges() {
 		return badges;
 	}
@@ -129,4 +148,14 @@ public class SOSendHandbagBean implements Serializable {
 		this.df = df;
 	}
 
+	public Badge getBadgeToDelete() {
+		return badgeToDelete;
+	}
+
+	public void setBadgeToDelete(Badge badgeToDelete) {
+		this.badgeToDelete = badgeToDelete;
+	}
+	
+	
+	
 }

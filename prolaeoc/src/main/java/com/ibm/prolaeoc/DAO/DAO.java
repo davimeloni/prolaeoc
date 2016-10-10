@@ -69,9 +69,9 @@ public class DAO<T> {
 		return list;
 	}
 
-	public T searchForId(Integer id) {
+	public T searchForId(long l) {
 		EntityManager em = new JPAUtil().getEntityManager();
-		T instance = em.find(classe, id);
+		T instance = em.find(classe, l);
 		em.close();
 		return instance;
 	}
@@ -110,5 +110,18 @@ public class DAO<T> {
 		return query.getResultList();
 	}
 
+	public Long lastBadgeForPIN() {
+		EntityManager em = new JPAUtil().getEntityManager();
+		long result = (Long) em.createQuery("select pin from Badge ORDER by id DESC").setMaxResults(1).getSingleResult();
+		
+		return result;
+	}
+	
+	public String lastHandbagNumber() {
+		EntityManager em = new JPAUtil().getEntityManager();
+		String result = (String) em.createQuery("select handbag_number from Handbag ORDER by id DESC").setMaxResults(1).getSingleResult();
+		
+		return result;
+	}
 
 }

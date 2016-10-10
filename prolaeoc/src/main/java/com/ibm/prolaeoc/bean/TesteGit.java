@@ -16,7 +16,10 @@ import javax.persistence.TypedQuery;
 import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.DAO.JPAUtil;
 import com.ibm.prolaeoc.model.Badge;
+import com.ibm.prolaeoc.model.Handbag;
 import com.ibm.prolaeoc.model.Location;
+
+import antlr.debug.ParserListener;
 
 public class TesteGit {
 
@@ -25,6 +28,7 @@ public class TesteGit {
 		Badge badge = new Badge();
 		// badge.setName("Davi");
 		Date date = new Date();
+		Handbag hb = new Handbag();
 
 		/*
 		 * int i = new DAO<Badge>(Badge.class).countAll();
@@ -55,11 +59,22 @@ public class TesteGit {
 		for (String temp : uniqueSet) {
 			String e = temp + ": " + Collections.frequency(locations, temp);
 			toPrint.add(e);
-		}*/
+		}
 		List<Badge> bb = new DAO<Badge>(Badge.class).listReception("lalala");
 		for(Badge b: bb) {
 			System.out.println(b.getHandbag()+ " " + b.getName());
-		}
+		}*/
+		
+		badge = new DAO<Badge>(Badge.class).searchForId(1002);
+		
+		//long l = Long.parseLong(new DAO<String>(String.class).lastHandbagNumber().substring(5)) + 1;
+		
+		//hb.setHandbag_number("LAEOC" + String.format("%05d", l));
+		
+		//System.out.println(hb.getHandbag_number());
+		
+		new DAO<Badge>(Badge.class).remove(badge);
+		
 	}
 
 }

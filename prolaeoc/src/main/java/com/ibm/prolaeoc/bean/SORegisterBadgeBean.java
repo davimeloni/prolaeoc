@@ -1,5 +1,6 @@
 package com.ibm.prolaeoc.bean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -15,17 +16,11 @@ public class SORegisterBadgeBean {
 	private Location location;
 	private String stringLocation;
 	
+	@PostConstruct
+	public void generatePIN () {
+		this.badge.setPin(new DAO<Long>(Long.class).lastBadgeForPIN() + 1);
+	}
 	
-	/*public void save_old() {
-		repository.add(this.badge);
-		badge = new Badge();
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Badge successfully saved"));
-
-	}*/
-	
-
 	public void save() {
 		System.out.println("saving badge " + this.badge.getName());
 		this.badge.setStatus("Created");
@@ -33,10 +28,15 @@ public class SORegisterBadgeBean {
 
 		this.badge = new Badge();
 		
+		generatePIN();
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Badge successfully saved"));
+		
 	}
+	
 
+	// getters and setters ----------------------------------------------------------
 	public Badge getBadge() {
 		return badge;
 	}
