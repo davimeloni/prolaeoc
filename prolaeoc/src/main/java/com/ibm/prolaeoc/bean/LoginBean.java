@@ -2,6 +2,7 @@ package com.ibm.prolaeoc.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -9,7 +10,7 @@ import com.ibm.prolaeoc.DAO.OperatorDAO;
 import com.ibm.prolaeoc.model.Operator;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class LoginBean {
 
 	private Operator operator = new Operator();
@@ -36,7 +37,7 @@ public class LoginBean {
 	
 	public String deslogar() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().remove("operatorLogged");
+		context.getExternalContext().invalidateSession();
 		return "login?faces-redirect=true";
 	}
 }

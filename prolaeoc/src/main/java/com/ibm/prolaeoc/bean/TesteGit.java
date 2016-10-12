@@ -65,7 +65,7 @@ public class TesteGit {
 			System.out.println(b.getHandbag()+ " " + b.getName());
 		}*/
 		
-		badge = new DAO<Badge>(Badge.class).searchForId(1002);
+		//badge = new DAO<Badge>(Badge.class).searchForId(1002);
 		
 		//long l = Long.parseLong(new DAO<String>(String.class).lastHandbagNumber().substring(5)) + 1;
 		
@@ -73,7 +73,8 @@ public class TesteGit {
 		
 		//System.out.println(hb.getHandbag_number());
 		
-		new DAO<Badge>(Badge.class).remove(badge);
+		//new DAO<Badge>(Badge.class).remove(badge);
+		System.out.println(new DAO<Badge>(Badge.class).listBadgesToActivate());
 		
 	}
 

@@ -16,8 +16,9 @@
 		<h:form>
 			<h:graphicImage library="css" name="ibmwhite.png" />
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
-				Olá, Operador! |
-				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+				Hi, #{operator.name}! |
+				<p:commandButton type="button" value="Logout"
+					action="#{loginBean.deslogar}" icon="ui-icon-extlink" />
 			</div>
 		</h:form>
 	</header>
@@ -33,17 +34,13 @@
 
 	<h:form>
 		<p:tabMenu activeIndex="#{param.i}">
-			<p:menuitem value="Register Badge"
-				outcome="soregisterbadge?faces-redirect=true" icon="ui-icon-person">
+			<p:menuitem value="Handbag List"
+				outcome="rcollecthandbag?faces-redirect=true" icon="ui-icon-document">
 				<f:param name="i" value="0" />
 			</p:menuitem>
-			<p:menuitem value="Select Location"
-				outcome="soselectlocation?faces-redirect=true" icon="ui-icon-search">
+			<p:menuitem value="Badge Activation"
+				outcome="remployeereceivebadge?faces-redirect=true" icon="ui-icon-person">
 				<f:param name="i" value="1" />
-			</p:menuitem>
-			<p:menuitem value="Send Handbag"
-				outcome="sosendhandbag?faces-redirect=true" icon="ui-icon-document">
-				<f:param name="i" value="2" />
 			</p:menuitem>
 		</p:tabMenu>
 	</h:form>

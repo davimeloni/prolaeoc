@@ -114,7 +114,7 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
-	@Column(columnDefinition="varchar")
+	@Column()
 	public Operator getOperator() {
 		return operator;
 	}
@@ -138,7 +138,7 @@ public class Badge implements Serializable{
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-
+	
 	public String getLocation() {
 		return location;
 	}

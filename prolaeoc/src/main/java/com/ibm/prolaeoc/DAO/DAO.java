@@ -104,8 +104,9 @@ public class DAO<T> {
 	
 	public List<Badge> listReception(String handbag) {
 		EntityManager em = new JPAUtil().getEntityManager();
-		TypedQuery<Badge> query = em.createQuery("from Badge where handbag=:phandbag", Badge.class);
+		TypedQuery<Badge> query = em.createQuery("from Badge where handbag=:phandbag and status=:pstatus ", Badge.class);
 		query.setParameter("phandbag", handbag);
+		query.setParameter("pstatus", "SentToReception");
 		
 		return query.getResultList();
 	}
@@ -123,5 +124,15 @@ public class DAO<T> {
 		
 		return result;
 	}
+	
+	public List<Badge> listBadgesToActivate() {
+		EntityManager em = new JPAUtil().getEntityManager();
+		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus", Badge.class);
+		query.setParameter("pstatus", "InReception");
+		
+		return query.getResultList();
+		
+	}
 
+	
 }

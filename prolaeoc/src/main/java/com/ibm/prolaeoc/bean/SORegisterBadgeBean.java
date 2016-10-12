@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.model.Badge;
 import com.ibm.prolaeoc.model.Location;
+import com.ibm.prolaeoc.model.Operator;
 
 @ManagedBean(name="registerbadgebean")
 public class SORegisterBadgeBean {
@@ -15,6 +16,7 @@ public class SORegisterBadgeBean {
 	private Badge badge = new Badge();
 	private Location location;
 	private String stringLocation;
+	private Operator operator = new Operator();
 	
 	@PostConstruct
 	public void generatePIN () {

@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<ui:composition template="/WEB-INF/template/LayoutReception.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<ui:define name="titulo">Handbag List</ui:define>
+	
+	<ui:define name="corpo">
+		<h1>Handbag List</h1>
+		<h:form id="frm">
+			
+			<p:outputLabel value="Handbag Number: " for="handbag" />
+			<p:inputText size="12"
+				value="#{collecthandbagbean.handbag.handbag_number}" id="handbag">
+			</p:inputText>
+			
+			<p:commandButton value="List Badges" styleClass="apply_button" actionListener="#{collecthandbagbean.listByHandbag}" update="clist" />
+			<p:separator/>
+			<p:dataTable id="clist" var="badge" value="#{collecthandbagbean.badges}"
+				selection="#{collecthandbagbean.badgesCollected2}" rowKey="#{badge.id}" >
+				<p:ajax event="rowSelectCheckbox" process="clist"
+					listener="#{collecthandbagbean.selectListener}" />
+				<f:facet name="header">Handbag List</f:facet>
 
-</body>
-</html>
+				<p:column selectionMode="multiple" style="width:2%" />
+
+				<!-- data columns here, working just fine -->
+				<p:column headerText="Serial" sortBy="{badge.serial}">
+					<h:outputText value="#{badge.serial}" />
+				</p:column>
+				<p:column headerText="Name" sortBy="#{badge.name}">
+					<h:outputText value="#{badge.name}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Collect Handbag"
+						icon="ui-icon-disk" action="#{collecthandbagbean.collectHandbag()}" process="clist" update="@form" >
+					</p:commandButton>
+				</f:facet>
+				
+			</p:dataTable>
+			
+		</h:form>
+	</ui:define>
+	
+	
+	
+	</ui:composition>
