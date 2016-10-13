@@ -18,6 +18,7 @@ import com.ibm.prolaeoc.DAO.JPAUtil;
 import com.ibm.prolaeoc.model.Badge;
 import com.ibm.prolaeoc.model.Handbag;
 import com.ibm.prolaeoc.model.Location;
+import com.ibm.prolaeoc.model.Operator;
 
 import antlr.debug.ParserListener;
 
@@ -29,6 +30,7 @@ public class TesteGit {
 		// badge.setName("Davi");
 		Date date = new Date();
 		Handbag hb = new Handbag();
+		Operator op = new Operator();
 
 		/*
 		 * int i = new DAO<Badge>(Badge.class).countAll();
@@ -74,8 +76,20 @@ public class TesteGit {
 		//System.out.println(hb.getHandbag_number());
 		
 		//new DAO<Badge>(Badge.class).remove(badge);
-		System.out.println(new DAO<Badge>(Badge.class).listBadgesToActivate());
+		//System.out.println(new DAO<Badge>(Badge.class).listBadgesToActivate());
 		
+		//badge = new DAO<Badge>(Badge.class).searchForSerial(12346);
+		//System.out.println(badge.getName());
+		
+		op.setEmail("admin@br.ibm.com");
+		op.setEnabled(true);
+		op.setName("admin");
+		op.setPassword("12345");
+		op.setType("Operator");
+		
+		hb.setHandbag_number("LAEOC00000");
+		
+		new DAO<Handbag>(Handbag.class).add(hb);
 	}
 
 }

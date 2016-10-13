@@ -22,7 +22,7 @@
 			<p:separator/>
 			<p:dataTable id="clist" var="badge" value="#{collecthandbagbean.badges}"
 				selection="#{collecthandbagbean.badgesCollected2}" rowKey="#{badge.id}" >
-				<p:ajax event="rowSelectCheckbox" process="clist"
+				<p:ajax event="rowSelectCheckbox" process="clist" 
 					listener="#{collecthandbagbean.selectListener}" />
 				<f:facet name="header">Handbag List</f:facet>
 

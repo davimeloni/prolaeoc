@@ -6,10 +6,6 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<f:metadata>
-		<f:viewAction action="#{employeereceivebean.listBadgesToActive}" />
-	</f:metadata>
-
 	<ui:define name="titulo">Badge Activation</ui:define>
 
 	<ui:define name="corpo">
@@ -18,27 +14,20 @@
 
 			<p:panelGrid id="pg" columns="2">
 
-				<!-- <p:column>
+				<p:column>
 					<p:outputLabel value="Serial: " for="serial" />
-					<p:selectOneMenu value="#{employeereceivebean.badge.serial}"
-						id="serial" filter="true" filterMatchMode="contains">
-						<f:selectItem itemLabel="Select serial" noSelectionOption="true" />
-						<f:selectItems value="#{employeereceivebean.badges}" var="serial"
-							itemValue="#{badge.serial}" itemLabel="#{badge.serial}" />
-					</p:selectOneMenu>
-				</p:column> -->
+					<p:inputText id="serial" size="10" value="#{employeereceivebean.idString}" >
+						<p:ajax event="blur" update="badgename" listener="#{employeereceivebean.findBadgeBySerial}" />
+					</p:inputText>
+				</p:column>
 
 				<p:column>
-					<p:outputLabel value="Name: " for="name" />
-					<p:selectOneMenu value="#{employeereceivebean.badge.name}"
-						id="name" filter="true" filterMatchMode="contains">
-						<f:selectItem itemLabel="Select name" noSelectionOption="true" />
-						<f:selectItems value="#{employeereceivebean.badges}" var="name"
-							itemValue="#{badge.name}" itemLabel="#{badge.name}" />
-					</p:selectOneMenu>
+					<h:outputText id="badgename" value="#{employeereceivebean.badge.name}" />
 				</p:column>
+				
 				<f:facet name="footer">
-					<p:commandButton value="Activate" icon="ui-icon-disk">
+					<p:commandButton value="Activate" action="#{employeereceivebean.activateBadge}" 
+					update="@all" icon="ui-icon-disk">
 					</p:commandButton>
 				</f:facet>
 			</p:panelGrid>

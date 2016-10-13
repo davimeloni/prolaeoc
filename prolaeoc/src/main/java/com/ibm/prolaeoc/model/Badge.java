@@ -10,13 +10,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "LAEOCBADGE" , schema="DMEZA")
+@Table(name = "BADGE" , schema="DMEZA")
 public class Badge implements Serializable{
 	
 
@@ -42,7 +45,7 @@ public class Badge implements Serializable{
 	//manager approval
 	//photo
 	
-	@SequenceGenerator(name="SEQ_LAEOCBADGE", sequenceName="DMEZA.SEQ_LAEOCBADGE")
+	@SequenceGenerator(name="SEQ_LAEOCBADGE", allocationSize=1, initialValue=1,sequenceName="DMEZA.SEQ_LAEOCBADGE")
 	@Id @GeneratedValue(generator="SEQ_LAEOCBADGE", strategy=GenerationType.SEQUENCE)
 	public long getId() {
 		return id;
@@ -114,7 +117,8 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
-	@Column()
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "operator_id")
 	public Operator getOperator() {
 		return operator;
 	}
@@ -155,7 +159,6 @@ public class Badge implements Serializable{
 		this.work_location = work_location;
 	}
 
-	@Column(columnDefinition="varchar")
 	public String getHandbag() {
 		return handbag;
 	}

@@ -75,6 +75,15 @@ public class DAO<T> {
 		em.close();
 		return instance;
 	}
+	
+	public Badge searchForSerial(long l) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		TypedQuery<Badge> query = em.createQuery("from Badge where serial=:pserial and status=:pstatus", Badge.class);
+		query.setParameter("pserial", l);
+		query.setParameter("pstatus", "InReception");
+		
+		return query.getSingleResult();
+	}
 
 	public int countAll() {
 		EntityManager em = new JPAUtil().getEntityManager();

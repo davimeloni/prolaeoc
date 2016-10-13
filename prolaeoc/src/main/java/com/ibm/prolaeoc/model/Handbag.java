@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "LAEOCHANDBAG" , schema="DMEZA")
+@Table(name = "HANDBAG" , schema="DMEZA")
 public class Handbag implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class Handbag implements Serializable {
 	private String handbag_number;
 	private Date creation_date;
 	
-	@SequenceGenerator(name="SEQ_LAEOCHANDBAG", sequenceName="DMEZA.SEQ_LAEOCHANDBAG")
+	@SequenceGenerator(name="SEQ_LAEOCHANDBAG", allocationSize=1, initialValue=1, sequenceName="DMEZA.SEQ_LAEOCHANDBAG")
 	@Id @GeneratedValue(generator="SEQ_LAEOCHANDBAG", strategy=GenerationType.SEQUENCE)
 	public long getId() {
 		return id;
