@@ -21,7 +21,8 @@
 				<f:facet name="header">
             Locations and amount
         		</f:facet>
-				<p:link outcome="sosendhandbag?faces-redirect=true" value="#{location.key}, #{location.value}">
+				<p:link outcome="sosendhandbag?faces-redirect=true" value="|  #{location.key}: #{location.value}  |"
+					styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
 					<f:param name="location" value="#{location.key}" />
 				</p:link>
 			</p:dataList>

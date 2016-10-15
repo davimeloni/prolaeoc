@@ -81,15 +81,15 @@ public class TesteGit {
 		//badge = new DAO<Badge>(Badge.class).searchForSerial(12346);
 		//System.out.println(badge.getName());
 		
-		op.setEmail("admin@br.ibm.com");
+		op.setEmail("recepcionist@br.ibm.com");
 		op.setEnabled(true);
-		op.setName("admin");
-		op.setPassword("12345");
-		op.setType("Operator");
+		op.setName("Recepcionist");
+		op.setPassword("54321");
+		op.setType("RECEPCIONIST");
 		
-		hb.setHandbag_number("LAEOC00000");
+		//hb.setHandbag_number("LAEOC00000");
 		
-		new DAO<Handbag>(Handbag.class).add(hb);
+		new DAO<Operator>(Operator.class).add(op);
 	}
 
 }

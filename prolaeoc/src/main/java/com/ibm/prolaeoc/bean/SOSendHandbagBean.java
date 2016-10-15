@@ -57,7 +57,7 @@ public class SOSendHandbagBean implements Serializable {
 		System.out.println("check selection");
 	}
 	
-	//send handbag, save atributes
+	//send handbag, save attributes
 	public void sendHanbag () {
 		this.handbag.setCreation_date(actualDate);
 		

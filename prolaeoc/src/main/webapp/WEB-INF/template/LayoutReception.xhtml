@@ -18,7 +18,7 @@
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
 				Hi, #{operator.name}! |
 				<p:commandButton type="button" value="Logout"
-					action="#{loginBean.deslogar}" icon="ui-icon-extlink" />
+					action="#{loginBean.deslogar}" icon="ui-icon-extlink" ajax="false" />
 			</div>
 		</h:form>
 	</header>
@@ -33,16 +33,14 @@
 	</p:ajaxStatus>
 
 	<h:form>
-		<p:tabMenu activeIndex="#{param.i}">
-			<p:menuitem value="Handbag List"
-				outcome="rcollecthandbag?faces-redirect=true" icon="ui-icon-document">
-				<f:param name="i" value="0" />
-			</p:menuitem>
-			<p:menuitem value="Badge Activation"
-				outcome="remployeereceivebadge?faces-redirect=true" icon="ui-icon-person">
-				<f:param name="i" value="1" />
-			</p:menuitem>
-		</p:tabMenu>
+		<p:menubar style="margin-top: -20px; margin-bottom: 20px">
+			<p:submenu label="Menu" icon="ui-icon-home">
+				<p:menuitem value="Collect Badges" icon="ui-icon-arrowrefresh-1-w"
+					action="/rcollecthandbag?faces-redirect=true" />
+				<p:menuitem value="Active Badge" icon="ui-icon-star"
+					action="/remployeereceivebadge?faces-redirect=true" />
+			</p:submenu>
+		</p:menubar>
 	</h:form>
 	<p:separator />
 	<div id="conteudo">
