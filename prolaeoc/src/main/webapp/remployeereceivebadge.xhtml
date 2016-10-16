@@ -16,7 +16,7 @@
 
 				<p:column>
 					<p:outputLabel value="Serial: " for="serial" />
-					<p:inputText id="serial" size="10" value="#{employeereceivebean.idString}" >
+					<p:inputText id="serial" size="10" value="#{employeereceivebean.serialString}" >
 						<p:ajax event="blur" update="badgename" listener="#{employeereceivebean.findBadgeBySerial}" />
 					</p:inputText>
 				</p:column>

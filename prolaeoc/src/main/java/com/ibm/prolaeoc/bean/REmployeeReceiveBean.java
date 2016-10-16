@@ -22,10 +22,10 @@ public class REmployeeReceiveBean {
 	private List<Badge> badges;
 	private Badge badge = new Badge();
 	private Date actualDate = new Date();
-	private String idString;
+	private String serialString;
 
 	public void findBadgeBySerial() {
-		long l = Long.parseLong(this.idString);
+		long l = Long.parseLong(this.serialString);
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			this.badge = new DAO<Badge>(Badge.class).searchForSerial(l);
@@ -46,8 +46,8 @@ public class REmployeeReceiveBean {
 		new DAO<Badge>(Badge.class).update(this.badge);
 
 		this.badge = new Badge();
-
-		RequestContext.getCurrentInstance().reset("form");
+		this.serialString = null;
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Badge activated!"));
 	}
@@ -77,12 +77,14 @@ public class REmployeeReceiveBean {
 		this.actualDate = actualDate;
 	}
 
-	public String getIdString() {
-		return idString;
+	public String getSerialString() {
+		return serialString;
 	}
 
-	public void setIdString(String idString) {
-		this.idString = idString;
+	public void setSerialString(String serialString) {
+		this.serialString = serialString;
 	}
+
+	
 
 }
