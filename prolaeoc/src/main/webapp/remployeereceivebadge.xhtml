@@ -10,8 +10,8 @@
 
 	<ui:define name="corpo">
 		<h1>Badge Activation</h1>
-		<h:form id="frm">
-
+		<h:form id="form">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 			<p:panelGrid id="pg" columns="2">
 
 				<p:column>
@@ -27,7 +27,7 @@
 				
 				<f:facet name="footer">
 					<p:commandButton value="Activate" action="#{employeereceivebean.activateBadge}" 
-					update="frm" icon="ui-icon-disk"  >
+					update="form" icon="ui-icon-disk"  >
 					</p:commandButton>
 				</f:facet>
 			</p:panelGrid>

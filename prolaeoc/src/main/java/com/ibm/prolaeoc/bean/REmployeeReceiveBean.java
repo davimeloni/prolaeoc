@@ -10,49 +10,49 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
 import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.model.Badge;
 
-@ManagedBean(name="employeereceivebean")
+@ManagedBean(name = "employeereceivebean")
 @SessionScoped
 public class REmployeeReceiveBean {
-	
+
 	private List<Badge> badges;
 	private Badge badge = new Badge();
 	private Date actualDate = new Date();
 	private String idString;
-	
-	
+
 	public void findBadgeBySerial() {
 		long l = Long.parseLong(this.idString);
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-		this.badge = new DAO<Badge>(Badge.class).searchForSerial(l);
+			this.badge = new DAO<Badge>(Badge.class).searchForSerial(l);
+			
 		} catch (Exception e) {
 			System.out.println("badge not found or does not exist");
-			FacesMessage message = new FacesMessage(e.getMessage());
-			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, new FacesMessage("Badge not found or does not exist"));
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Badge not ready to active or does not exist!", "Error!"));
 		}
-		
 	}
-	
+
 	public void activateBadge() {
 		System.out.println(this.badge.getLocation());
 		this.badge.setStatus("BadgeActive");
 		this.badge.setReceived_date(actualDate);
 		this.badge.setActive(true);
-		
+
 		new DAO<Badge>(Badge.class).update(this.badge);
-		
+
 		this.badge = new Badge();
-		
+
+		RequestContext.getCurrentInstance().reset("form");
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Badge successfully activated"));
+		context.addMessage(null, new FacesMessage("Badge activated!"));
 	}
 
-	
-	//-------------------- getters an
+	// -------------------- getters an
 	public List<Badge> getBadges() {
 		return badges;
 	}
@@ -84,7 +84,5 @@ public class REmployeeReceiveBean {
 	public void setIdString(String idString) {
 		this.idString = idString;
 	}
-	
-	
-	
+
 }

@@ -58,7 +58,7 @@ public class RCollectHandbagBean implements Serializable {
 		this.badges = new DAO<String>(String.class).listReception(this.handbag.getHandbag_number());
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Handbag successfully saved"));
+		context.addMessage(null, new FacesMessage("Badges successfully collected"));
 	}
 
 	
