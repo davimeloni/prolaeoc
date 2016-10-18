@@ -37,7 +37,14 @@ public class RCollectHandbagBean implements Serializable {
 	
 	@PostConstruct
 	public void listByHandbag(ActionEvent event) {	
-		this.badges = new DAO<String>(String.class).listReception(this.handbag.getHandbag_number());	
+		this.badges = new DAO<String>(String.class).listReception(this.handbag.getHandbag_number());
+		System.out.println(this.badges.size());
+		if (this.badges.isEmpty()) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Handbag does not exist!", "Error!"));
+			this.badges = new ArrayList<>();
+		}
 	}
 	
 	public void selectListener(SelectEvent event) {
@@ -55,7 +62,8 @@ public class RCollectHandbagBean implements Serializable {
 			new DAO<Badge>(Badge.class).update(b);
 		}
 		
-		this.badges = new DAO<String>(String.class).listReception(this.handbag.getHandbag_number());
+		//this.badges = new DAO<String>(String.class).listReception(this.handbag.getHandbag_number());
+		this.badges = new ArrayList<>();
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Badges successfully collected"));
