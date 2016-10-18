@@ -42,9 +42,12 @@ public class LoginBean {
 	}
 
 	public String deslogar() {
-		System.out.println("lalala");
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		  
-		return "login?faces-redirect=true";
+		//System.out.println("lalala");
+		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();		  
+		//return "login?faces-redirect=true";
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+	    context.getExternalContext().getSessionMap().remove("operatorLogged");
+	    return "login?faces-redirect=true";	
 	}
 }

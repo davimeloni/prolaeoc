@@ -16,9 +16,9 @@
 		<h:form>
 			<h:graphicImage library="css" name="ibmwhite.png" />
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
-				Hi, #{operator.name}! |
-				<p:commandButton type="button" value="Logout"
-					action="#{loginBean.deslogar}" icon="ui-icon-extlink" ajax="false" />
+				Hi, Operator |
+				<p:commandLink value="Logout" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
+					action="#{loginBean.deslogar}"/>
 			</div>
 		</h:form>
 	</header>
