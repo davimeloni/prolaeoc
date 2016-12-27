@@ -34,9 +34,11 @@ public class SOSendHandbagBean implements Serializable {
 	private Badge badgeToDelete = new Badge();
 	private Badge[] selectedBadges2;
 	private Handbag handbag = new Handbag();
-	private DateFormat df = new SimpleDateFormat("dd/MM/yy");
+	private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	private Date actualDate = new Date();
-
+	private String dateForm = df.format(actualDate);
+	private String hbForm;
+	
 
 	//list badges from location
 	@PostConstruct
@@ -72,6 +74,8 @@ public class SOSendHandbagBean implements Serializable {
 			new DAO<Badge>(Badge.class).update(b);
 		}
 		
+		
+		this.hbForm = this.handbag.getHandbag_number();
 		new DAO<Handbag>(Handbag.class).add(this.handbag);
 		this.handbag = new Handbag();
 		
@@ -155,7 +159,21 @@ public class SOSendHandbagBean implements Serializable {
 	public void setBadgeToDelete(Badge badgeToDelete) {
 		this.badgeToDelete = badgeToDelete;
 	}
-	
-	
+
+	public String getDateForm() {
+		return dateForm;
+	}
+
+	public void setDateForm(String dateForm) {
+		this.dateForm = dateForm;
+	}
+
+	public String getHbForm() {
+		return hbForm;
+	}
+
+	public void setHbForm(String hbForm) {
+		this.hbForm = hbForm;
+	}
 	
 }

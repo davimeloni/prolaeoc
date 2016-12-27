@@ -17,6 +17,8 @@
 		<h1>Edit and Send Handbag</h1>
 		<h:form id="tableForm">
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<p:growl id="msgs" showDetail="true" />
+
 			<p:outputLabel value="Handbag Number: " for="handbag" />
 			<p:inputText size="12"
 				value="#{sendhandbagbean.handbag.handbag_number}" id="handbag">
@@ -43,7 +45,7 @@
 					<h:outputText value="#{badge.name}" />
 				</p:column>
 				<p:column headerText="Delete Badge">
-				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
 						process="@this" update="@form"
 						action="#{sendhandbagbean.deleteBadge}">
 						<f:setPropertyActionListener value="#{badge}"
@@ -52,12 +54,51 @@
 				</p:column>
 
 				<f:facet name="footer">
-					<p:commandButton value="Send Handbag"
-						icon="ui-icon-disk" action="#{sendhandbagbean.sendHanbag()}" update="@form"  >
+					<p:commandButton value="Send Handbag" icon="ui-icon-disk"
+						action="#{sendhandbagbean.sendHanbag()}" update="@form"
+						oncomplete="PF('display').show()">
 					</p:commandButton>
 				</f:facet>
 			</p:dataTable>
 
+
+
+
+			<p:dialog id="dsp" header="LAEOC" widgetVar="display" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="true">
+
+				<p:outputLabel value="#{sendhandbagbean.hbForm}" />
+				<br />
+				<p:outputLabel value="#{sendhandbagbean.location}" />
+				<br />
+				<p:outputLabel value="#{sendhandbagbean.dateForm}" />
+
+				<p:dataTable id="slist" var="badge"
+					value="#{sendhandbagbean.selectedBadges2}">
+
+					<!--  <f:facet name="header">
+						#{sendhandbagbean.hbForm} - #{sendhandbagbean.location} - #{sendhandbagbean.dateForm}
+					</f:facet>-->
+
+					<!-- data columns here, working just fine -->
+					<p:column headerText="Serial" sortBy="{badge.serial}">
+						<h:outputText value="#{badge.serial}" />
+					</p:column>
+					<p:column headerText="Name" sortBy="#{badge.name}">
+						<h:outputText value="#{badge.name}" />
+					</p:column>
+					<p:column headerText="Signature" />
+					<p:column headerText="Received Date" />
+					<p:column headerText="Received by other? Y/N" />
+					<p:column headerText="Activated" />
+				</p:dataTable>
+
+				<!-- <p:separator/>
+					
+					<h:commandLink value="PDF" >
+						<p:dataExporter type="pdf" target="slist" fileName="handbag" />
+					</h:commandLink>-->
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
