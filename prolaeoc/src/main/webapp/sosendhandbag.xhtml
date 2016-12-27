@@ -93,11 +93,11 @@
 					<p:column headerText="Activated" />
 				</p:dataTable>
 
-				<!-- <p:separator/>
-					
-					<h:commandLink value="PDF" >
-						<p:dataExporter type="pdf" target="slist" fileName="handbag" />
-					</h:commandLink>-->
+				<p:separator/>
+				<p:commandButton value="Print" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+    				<p:printer target="dsp" />
+				</p:commandButton>
+
 			</p:dialog>
 		</h:form>
 	</ui:define>
