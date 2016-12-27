@@ -6,19 +6,29 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
 
 
 	<persistence-unit name="Persistencia">
+		
+		
+<!-- 		<properties> -->
+<!-- 			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" /> -->
+<!-- 			<property name="javax.persistence.jdbc.url" value="jdbc:db2://localhost:50005/prolaeoc" /> -->
+<!-- 			<property name="javax.persistence.jdbc.user" value="dmeza" /> -->
+<!-- 			<property name="javax.persistence.jdbc.password" value="ibm00ibm" /> -->
 
-
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
+<!-- 			<property name="hibernate.show_sql" value="true" /> -->
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" /> -->
+<!-- 		</properties> -->
+		
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:db2://localhost:50005/prueba1" />
-			<property name="javax.persistence.jdbc.user" value="dmeza" />
-			<property name="javax.persistence.jdbc.password" value="ibm00ibm" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/prolaeoc" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
 
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 		</properties>
+		
 	</persistence-unit>
-
-
 </persistence>

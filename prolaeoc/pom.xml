@@ -18,8 +18,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-		<dependencies>
+
+	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -44,6 +44,11 @@
 		</dependency>
 
 		<!-- Driver JDBC do MySQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.5</version>
+		</dependency>
 
 		<!-- Mojarra (implementacao do JSF) -->
 		<dependency>
@@ -69,5 +74,5 @@
 		</dependency>
 
 	</dependencies>
-	
+
 </project>
