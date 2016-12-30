@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.Gson;
+
 @Entity
 @Table(name = "BADGE" , schema="DMEZA")
 public class Badge implements Serializable{
@@ -26,10 +28,7 @@ public class Badge implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
-	private String name;
-	private long serial;
 	private long pin;
-	private String location;
 	private String work_location;
 	private Date creation_date;
 	private Date send_date;
@@ -44,6 +43,20 @@ public class Badge implements Serializable{
 	private boolean isActive;
 	//manager approval
 	//photo
+	private String uid;
+	private String office;
+	private String building;
+	private String location;
+	private String officePhone;
+	private String orgtitle;
+	private String mobilePhone;
+	private String bio;
+	private String isEmployee;
+	private String floor;
+	private String email;
+	private String name;
+	private String imageUrl;
+	private String notesId;
 	
 	@SequenceGenerator(name="SEQ_LAEOCBADGE", allocationSize=1, initialValue=1,sequenceName="DMEZA.SEQ_LAEOCBADGE")
 	@Id @GeneratedValue(generator="SEQ_LAEOCBADGE", strategy=GenerationType.SEQUENCE)
@@ -61,14 +74,6 @@ public class Badge implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public long getSerial() {
-		return serial;
-	}
-
-	public void setSerial(long serial) {
-		this.serial = serial;
 	}
 
 	public long getPin() {
@@ -167,7 +172,105 @@ public class Badge implements Serializable{
 		this.handbag = handbag;
 	}
 	
-	
-	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
+	public String getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+
+	public String getOfficePhone() {
+		return officePhone;
+	}
+
+	public void setOfficePhone(String officePhone) {
+		this.officePhone = officePhone;
+	}
+
+	public String getOrgtitle() {
+		return orgtitle;
+	}
+
+	public void setOrgtitle(String orgtitle) {
+		this.orgtitle = orgtitle;
+	}
+
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getIsEmployee() {
+		return isEmployee;
+	}
+
+	public void setIsEmployee(String isEmployee) {
+		this.isEmployee = isEmployee;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getNotesId() {
+		return notesId;
+	}
+
+	public void setNotesId(String notesId) {
+		this.notesId = notesId;
+	}
+
+		// Convert objec to JSON
+		public String toJSON(){
+			return new Gson().toJson(this);
+		}
 
 }

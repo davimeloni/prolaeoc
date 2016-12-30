@@ -38,8 +38,8 @@
 				<p:column headerText="Location" sortBy="{badge.location}">
 					<h:outputText value="#{badge.location}" />
 				</p:column>
-				<p:column headerText="Serial" sortBy="{badge.serial}">
-					<h:outputText value="#{badge.serial}" />
+				<p:column headerText="Serial" sortBy="{badge.uid}">
+					<h:outputText value="#{badge.uid}" />
 				</p:column>
 				<p:column headerText="Name" sortBy="#{badge.name}">
 					<h:outputText value="#{badge.name}" />
@@ -55,9 +55,18 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Send Handbag" icon="ui-icon-disk"
-						action="#{sendhandbagbean.sendHanbag()}" update="@form"
-						oncomplete="PF('display').show()">
+						 action="#{sendhandbagbean.sendHanbag()}" update="@form"
+						  oncomplete="PF('display').show()">
+						<p:confirm header="Confirm Handbag" message="Please confirm this handbag" />
 					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="fade"
+						hideEffect="explode">
+						<p:commandButton title="YesButton" value="Yes"
+							styleClass="ui-confirmdialog-yes"  />
+						<p:commandButton title="NoButton" value="No"
+							styleClass="ui-confirmdialog-no" />
+					</p:confirmDialog>
 				</f:facet>
 			</p:dataTable>
 
@@ -81,8 +90,8 @@
 					</f:facet>-->
 
 					<!-- data columns here, working just fine -->
-					<p:column headerText="Serial" sortBy="{badge.serial}">
-						<h:outputText value="#{badge.serial}" />
+					<p:column headerText="Serial" sortBy="{badge.uid}">
+						<h:outputText value="#{badge.uid}" />
 					</p:column>
 					<p:column headerText="Name" sortBy="#{badge.name}">
 						<h:outputText value="#{badge.name}" />
@@ -93,9 +102,13 @@
 					<p:column headerText="Activated" />
 				</p:dataTable>
 
-				<p:separator/>
-				<p:commandButton value="Print" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
-    				<p:printer target="dsp" />
+				<p:separator />
+				<p:commandButton value="Print" type="button"
+					icon="ui-icon-print"
+					style="display:block;margin-bottom: 20px; text-align:center;"
+					
+					oncomplete="PF('display').hide()">
+					<p:printer target="dsp" />
 				</p:commandButton>
 
 			</p:dialog>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/LayoutOperator.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Register Badge</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Register Badge</h1>
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<p:panelGrid id="pg" columns="2">
+
+				<p:column>
+					<p:outputLabel value="Serial: " for="serial" />
+					<p:inputText id="serial" size="10" value="#{registerbadgebean.searchUID}" >
+						<p:ajax event="blur" update="badgename" listener="#{registerbadgebean.findBadgeByUID()}" />
+					</p:inputText>
+				</p:column>
+
+				<p:column>
+					<h:outputText id="badgename" value="#{registerbadgebean.badge.name}" />
+				</p:column>
+				
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
