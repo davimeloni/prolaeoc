@@ -77,6 +77,7 @@ public class DAO<T> {
 	}
 	
 	public Badge searchForSerial(String s) {
+		s = s.toUpperCase();
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<Badge> query = em.createQuery("from Badge where uid=:puid and status=:pstatus", Badge.class);
 		query.setParameter("puid", s);
@@ -112,6 +113,7 @@ public class DAO<T> {
 	}
 	
 	public List<Badge> listReception(String handbag) {
+		handbag = handbag.toUpperCase();
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<Badge> query = em.createQuery("from Badge where handbag=:phandbag and status=:pstatus ", Badge.class);
 		query.setParameter("phandbag", handbag);
@@ -141,6 +143,15 @@ public class DAO<T> {
 		
 		return query.getResultList();
 		
+	}
+	
+	public List<Badge> listReportByUID(String s) {
+		s = s.toUpperCase();
+		EntityManager em = new JPAUtil().getEntityManager();
+		TypedQuery<Badge> query = em.createQuery("from Badge where uid=:puid", Badge.class);
+		query.setParameter("puid", s);
+		
+		return query.getResultList();
 	}
 
 	

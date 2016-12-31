@@ -10,8 +10,7 @@
 
 	<ui:define name="corpo">
 		<h1>Badge Activation</h1>
-		<h3>1. Insert the employee serial and press TAB or click in anywhere outside the Serial Box.</h3>
-		<h3>2. When the employee name appears, press the Activate button, to activate it.</h3>
+
 		<h:form id="form">
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 			<p:panelGrid id="pg" columns="2">
@@ -19,17 +18,24 @@
 				<p:column>
 					<p:outputLabel value="Serial: " for="serial" />
 					<p:inputText id="serial" size="10" value="#{employeereceivebean.serialString}" >
-						<p:ajax event="blur" update="badgename" listener="#{employeereceivebean.findBadgeBySerial}" />
+
 					</p:inputText>
 				</p:column>
 
+				<p:commandButton value="Search Employee" styleClass="apply_button" 
+					actionListener="#{employeereceivebean.findBadgeBySerial}" update="badgename, readytoactive" />
+				
 				<p:column>
 					<h:outputText id="badgename" value="#{employeereceivebean.badge.name}" />
 				</p:column>
 				
+				<p:column>
+					<h:outputText id="readytoactive" value="#{employeereceivebean.isReady}" />
+				</p:column>
+				
 				<f:facet name="footer">
 					<p:commandButton value="Activate" action="#{employeereceivebean.activateBadge}" 
-					update="form" icon="ui-icon-disk"  >
+					update="form" icon="ui-icon-disk" widgetVar="buttonWidget" id="button" >
 					</p:commandButton>
 				</f:facet>
 			</p:panelGrid>

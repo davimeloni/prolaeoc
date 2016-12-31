@@ -39,7 +39,7 @@ public class SORegisterBadgeBean {
 
 	public void save() {
 		System.out.println("saving badge " + this.badge.getName());
-		this.badge.setUid(this.searchUID);
+		this.badge.setUid(this.searchUID.toUpperCase());
 		this.badge.setStatus("Created");
 		this.badge.setCreation_date(actualDate);
 		new DAO<Badge>(Badge.class).add(this.badge);

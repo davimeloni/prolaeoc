@@ -42,7 +42,7 @@ public class RCollectHandbagBean implements Serializable {
 		if (this.badges.isEmpty()) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Handbag does not exist!", "Error!"));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Handbag does not exist or it is empty!", "Error!"));
 			this.badges = new ArrayList<>();
 		}
 	}

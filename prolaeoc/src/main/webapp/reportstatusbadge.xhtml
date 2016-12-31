@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/LayoutOperator.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Report Badge Status</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Report Badge Status</h1>
+		<h:form id="frm">
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
+			<p:outputLabel value="Search Serial: " for="serial" />
+			<p:inputText size="12"
+				value="#{reportbadgestatusbean.serialString}" id="serial">
+			</p:inputText>
+			
+			<p:commandButton value="Badge Status" styleClass="apply_button" actionListener="#{reportbadgestatusbean.findBadgeBySerial}" update="rlist" />
+
+			<p:separator/>
+
+			<p:dataTable id="rlist" var="badge" value="#{reportbadgestatusbean.badges}" >
+				<f:facet name="header">Badge</f:facet>
+
+				<p:column headerText="Serial" sortBy="{badge.uid}">
+					<h:outputText value="#{badge.uid}" />
+				</p:column>
+				<p:column headerText="Name" sortBy="#{badge.name}">
+					<h:outputText value="#{badge.name}" />
+				</p:column>
+				<p:column headerText="Creation date" sortBy="#{badge.creation_date}">
+					<h:outputText value="#{badge.creation_date}" />
+				</p:column>
+				<p:column headerText="Last Updated Date" sortBy="#{reportbadgestatusbean.dateForm}">
+					<h:outputText value="#{reportbadgestatusbean.dateForm}" />
+				</p:column>
+				<p:column headerText="Status" sortBy="#{badge.status}">
+					<h:outputText value="#{badge.status}" />
+				</p:column>
+
+				<p:column headerText="Delete Badge">
+					<p:commandButton icon="ui-icon-trash" title="Delete"
+						process="@this" update="@form"
+						action="#{reportbadgestatusbean.deleteBadge}">
+						<f:setPropertyActionListener value="#{badge}"
+							target="#{reportbadgestatusbean.badgeToDelete}" />
+					</p:commandButton>
+					
+				</p:column>
+				
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

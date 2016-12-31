@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 
 import org.primefaces.context.RequestContext;
@@ -23,17 +24,23 @@ public class REmployeeReceiveBean {
 	private Badge badge = new Badge();
 	private Date actualDate = new Date();
 	private String serialString;
+	private String isReady;
+	
+	public REmployeeReceiveBean () {
+		
+	}
 
-	public void findBadgeBySerial() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		try {
+	public void findBadgeBySerial(ActionEvent event) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
 			this.badge = new DAO<Badge>(Badge.class).searchForSerial(this.serialString);
+			this.isReady = "Badge Ready to Active!";
 			
-//		} catch (Exception e) {
-//			System.out.println("badge not found or does not exist");
-//			context.addMessage(null,
-//					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Badge not ready to active or does not exist!", "Error!"));
-//		}
+		} catch (Exception e) {
+			System.out.println("badge not found or does not exist");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Badge not ready to active or does not exist!", "Error!"));
+		}
 	}
 
 	public void activateBadge() {
@@ -46,6 +53,7 @@ public class REmployeeReceiveBean {
 
 		this.badge = new Badge();
 		this.serialString = null;
+		this.isReady = null;
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Badge activated!"));
@@ -84,6 +92,12 @@ public class REmployeeReceiveBean {
 		this.serialString = serialString;
 	}
 
-	
+	public String getIsReady() {
+		return isReady;
+	}
+
+	public void setIsReady(String isReady) {
+		this.isReady = isReady;
+	}
 
 }
