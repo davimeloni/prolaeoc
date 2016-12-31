@@ -25,16 +25,15 @@ public class REmployeeReceiveBean {
 	private String serialString;
 
 	public void findBadgeBySerial() {
-		long l = Long.parseLong(this.serialString);
-		FacesContext context = FacesContext.getCurrentInstance();
-		try {
-			this.badge = new DAO<Badge>(Badge.class).searchForSerial(l);
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		try {
+			this.badge = new DAO<Badge>(Badge.class).searchForSerial(this.serialString);
 			
-		} catch (Exception e) {
-			System.out.println("badge not found or does not exist");
-			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Badge not ready to active or does not exist!", "Error!"));
-		}
+//		} catch (Exception e) {
+//			System.out.println("badge not found or does not exist");
+//			context.addMessage(null,
+//					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Badge not ready to active or does not exist!", "Error!"));
+//		}
 	}
 
 	public void activateBadge() {

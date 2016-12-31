@@ -76,10 +76,10 @@ public class DAO<T> {
 		return instance;
 	}
 	
-	public Badge searchForSerial(long l) {
+	public Badge searchForSerial(String s) {
 		EntityManager em = new JPAUtil().getEntityManager();
-		TypedQuery<Badge> query = em.createQuery("from Badge where serial=:pserial and status=:pstatus", Badge.class);
-		query.setParameter("pserial", l);
+		TypedQuery<Badge> query = em.createQuery("from Badge where uid=:puid and status=:pstatus", Badge.class);
+		query.setParameter("puid", s);
 		query.setParameter("pstatus", "InReception");
 		
 		return query.getSingleResult();

@@ -16,28 +16,28 @@
 		<h1>Register Badge</h1>
 		<h:form id="frm">
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-
 			
-
 			<p:panelGrid columns="2">
 
-				<p:outputLabel value="Serial: " for="serial" />
-				<p:inputText id="serial" size="10" value="#{registerbadgebean.searchUID}" >
-					<p:ajax event="blur" update="name, location, email" listener="#{registerbadgebean.findBadgeByUID}" />
-				</p:inputText>
-				
+				<p:outputLabel value="Serial" for="serial" />
+			<p:inputText id="serial" size="15"
+				value="#{registerbadgebean.searchUID}">
+				<p:ajax event="blur" update="name, location, email"
+					listener="#{registerbadgebean.findBadgeByUID}" />
+			</p:inputText>
+
 				<p:outputLabel value="Name" for="name" />
-				<p:inputText size="12" value="#{registerbadgebean.badge.name}"
+				<p:inputText size="15" value="#{registerbadgebean.badge.name}"
 					id="name">
 				</p:inputText>
 
 				<p:outputLabel value="Pin" for="pin" />
-				<p:inputText size="12" value="#{registerbadgebean.badge.pin}"
+				<p:inputText size="15" value="#{registerbadgebean.badge.pin}"
 					id="pin">
 				</p:inputText>
 
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText size="12" value="#{registerbadgebean.badge.email}"
+				<p:inputText size="15" value="#{registerbadgebean.badge.email}"
 					id="email">
 				</p:inputText>
 
@@ -45,9 +45,8 @@
 				<p:selectOneMenu value="#{registerbadgebean.badge.location}"
 					id="location" filter="true" filterMatchMode="contains">
 					<f:selectItem itemLabel="Select location" noSelectionOption="true" />
-					<f:selectItems value="#{registerbadgebean.location}"
-						var="location" itemValue="#{location}"
-						itemLabel="#{location.description}" />
+					<f:selectItems value="#{registerbadgebean.location}" var="location"
+						itemValue="#{location}" itemLabel="#{location.description}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Work Location" for="work_location" />
@@ -61,13 +60,13 @@
 
 				<p:outputLabel value="Creation Date" />
 				<h:outputText value="#{currentDate}">
-					<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
 				</h:outputText>
 
-<!-- 				<p:outputLabel value="Creation Date" for="creationDate" /> -->
-<!-- 				<p:calendar size="12" -->
-<!-- 					value="#{registerbadgebean.badge.creation_date}" id="creationDate" -->
-<!-- 					pattern="dd/MM/yyyy" /> -->
+				<!-- 				<p:outputLabel value="Creation Date" for="creationDate" /> -->
+				<!-- 				<p:calendar size="12" -->
+				<!-- 					value="#{registerbadgebean.badge.creation_date}" id="creationDate" -->
+				<!-- 					pattern="dd/MM/yyyy" /> -->
 
 				<p:commandButton value="Submit" action="#{registerbadgebean.save}"
 					icon="ui-icon-disk" update="@form" />
