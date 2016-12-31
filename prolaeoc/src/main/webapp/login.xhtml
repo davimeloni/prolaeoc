@@ -15,7 +15,7 @@
 				<p:outputLabel value="Email" for="email" />
 				<p:inputText id="email" required="true" size="20" value="#{loginBean.operator.email}" />
 				<p:outputLabel value="Password" for="password" />
-				<p:password id="password" feedback="true"  required="true" size="20" value="#{loginBean.operator.password}" />
+				<p:password id="password" feedback="false"  required="true" size="20" value="#{loginBean.operator.password}" />
 				<p:outputLabel />
 				<p:commandButton value="Login" action="#{loginBean.doLogin}" />
 			</h:panelGrid>
