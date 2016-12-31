@@ -44,10 +44,19 @@
 				<p:column headerText="Delete Badge">
 					<p:commandButton icon="ui-icon-trash" title="Delete"
 						process="@this" update="@form"
-						action="#{reportbadgestatusbean.deleteBadge}">
+						action="#{reportbadgestatusbean.deleteBadge()}">
 						<f:setPropertyActionListener value="#{badge}"
 							target="#{reportbadgestatusbean.badgeToDelete}" />
+						<p:confirm header="Delete Badge" message="Are you sure?" />
 					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade"
+						hideEffect="fade">
+						<p:commandButton value="Yes" type="button" 
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  />
+						<p:commandButton value="No" type="button" 
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 					
 				</p:column>
 				

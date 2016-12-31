@@ -17,7 +17,7 @@ import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.model.Badge;
 
 @ManagedBean(name="reportbadgestatusbean")
-@ViewScoped
+@SessionScoped
 public class SOReportBadgeStatusBean {
 	
 	private String serialString;
@@ -59,7 +59,10 @@ public class SOReportBadgeStatusBean {
 	
 	//delete badge
 		public void deleteBadge() {
+			FacesContext context = FacesContext.getCurrentInstance();
 			new DAO<Badge>(Badge.class).remove(this.badgeToDelete);
+			this.badges = new DAO<Badge>(Badge.class).listReportByUID(this.serialString);
+			context.addMessage(null, new FacesMessage("Badge successfully deleted"));
 		}
 
 	
