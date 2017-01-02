@@ -42,14 +42,22 @@ public class SORegisterBadgeBean {
 		this.badge.setUid(this.searchUID.toUpperCase());
 		this.badge.setStatus("Created");
 		this.badge.setCreation_date(actualDate);
-		new DAO<Badge>(Badge.class).add(this.badge);
 
-		this.badge = new Badge();
+		if (!this.badge.getUid().isEmpty()) {
 
-		generatePIN();
+			new DAO<Badge>(Badge.class).add(this.badge);
 
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Badge successfully saved"));
+			this.badge = new Badge();
+
+			generatePIN();
+
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Badge successfully saved"));
+
+		} else {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Serial is empty!", "Error!"));
+		}
 
 	}
 
