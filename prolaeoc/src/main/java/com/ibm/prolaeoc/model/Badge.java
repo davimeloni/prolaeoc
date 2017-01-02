@@ -3,6 +3,7 @@ package com.ibm.prolaeoc.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
 import com.google.gson.Gson;
 
 @Entity
-@Table(name = "BADGE" , schema="DMEZA")
+@Table(name = "BADGE" , schema="DMEZA" )
 public class Badge implements Serializable{
 	
 
@@ -122,7 +123,7 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = true, cascade=CascadeType.ALL)
 	@JoinColumn(name = "operator_id")
 	public Operator getOperator() {
 		return operator;

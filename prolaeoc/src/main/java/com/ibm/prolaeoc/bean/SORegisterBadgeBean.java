@@ -8,7 +8,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +22,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
 @ManagedBean(name = "registerbadgebean")
+@ViewScoped
 public class SORegisterBadgeBean {
 
 	private Badge badge = new Badge();
@@ -27,7 +30,6 @@ public class SORegisterBadgeBean {
 	private Badge bluepagesID = new Badge();
 	private Location location;
 	private String stringLocation;
-	private Operator operator = new Operator();
 	private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	private Date actualDate = new Date();
 	private String dateForm = df.format(actualDate);
@@ -38,9 +40,15 @@ public class SORegisterBadgeBean {
 	}
 
 	public void save() {
+
+		// Get current operator
+		FacesContext context = FacesContext.getCurrentInstance();
+		Operator operatorlogged = (Operator) context.getExternalContext().getSessionMap().get("operatorLogged");
+
 		System.out.println("saving badge " + this.badge.getName());
 		this.badge.setUid(this.searchUID.toUpperCase());
 		this.badge.setStatus("Created");
+		this.badge.setOperator(operatorlogged);
 		this.badge.setCreation_date(actualDate);
 
 		if (!this.badge.getUid().isEmpty()) {
@@ -51,11 +59,11 @@ public class SORegisterBadgeBean {
 
 			generatePIN();
 
-			FacesContext context = FacesContext.getCurrentInstance();
+			context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage("Badge successfully saved"));
 
 		} else {
-			FacesContext context = FacesContext.getCurrentInstance();
+			context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Serial is empty!", "Error!"));
 		}
 
