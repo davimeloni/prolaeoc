@@ -16,15 +16,17 @@
 		<h1>Register Badge</h1>
 		<h:form id="frm">
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-			
+
 			<p:panelGrid columns="2">
 
 				<p:outputLabel value="Serial (Search)" for="serial" />
-			<p:inputText id="serial" size="15"
-				value="#{registerbadgebean.searchUID}">
-				<p:ajax event="blur" update="name, location, email"
-					listener="#{registerbadgebean.findBadgeByUID}" />
-			</p:inputText>
+				<p:inputText id="serial" size="15"
+					value="#{registerbadgebean.searchUID}">
+					<p:ajax event="blur" update="name, location, email"
+						listener="#{registerbadgebean.findBadgeByUID}"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()" />
+				</p:inputText>
 
 				<p:outputLabel value="Name" for="name" />
 				<p:inputText size="15" value="#{registerbadgebean.badge.name}"
@@ -72,6 +74,11 @@
 					icon="ui-icon-disk" update="@form" />
 
 			</p:panelGrid>
+
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage library="css" name="loading2.gif" />
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
