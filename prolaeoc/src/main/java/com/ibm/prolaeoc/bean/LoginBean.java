@@ -9,6 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import com.ibm.prolaeoc.DAO.DAO;
 import com.ibm.prolaeoc.DAO.OperatorDAO;
 import com.ibm.prolaeoc.model.Operator;
 
@@ -35,14 +36,14 @@ public class LoginBean {
 		System.out.println("###### doing the login for Operator " + this.operator.getEmail());
 
 		FacesContext context = FacesContext.getCurrentInstance();
-		boolean existe = new OperatorDAO().exits(this.operator);
-
-		if (existe) {
+		this.operator = new OperatorDAO().exists(this.operator);
+		
+		if (this.operator.getEmail() != null) {
 			ExternalContext ec =context.getExternalContext();
 			HttpSession session = (HttpSession)ec.getSession(false);
 			session.setAttribute("operatorLogged",this.operator);
 
-			if ("recepcionist@br.ibm.com".equals(this.operator.getEmail())) {
+			if ("recepcionist".equals(this.operator.getType())) {
 				context.getExternalContext().getSessionMap().put("operatorLogged", this.operator);
 				return "rcollecthandbag?faces-redirect=true";
 			} else {

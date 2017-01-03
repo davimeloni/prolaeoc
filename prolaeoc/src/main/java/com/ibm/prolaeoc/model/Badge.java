@@ -37,6 +37,9 @@ public class Badge implements Serializable{
 	private Date received_date;
 	
 	private String handbag;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "operator_id")
 	private Operator operator;
 	
 	private String status;
@@ -123,8 +126,7 @@ public class Badge implements Serializable{
 		this.received_date = received_date;
 	}
 
-	@ManyToOne(optional = true, cascade=CascadeType.ALL)
-	@JoinColumn(name = "operator_id")
+
 	public Operator getOperator() {
 		return operator;
 	}

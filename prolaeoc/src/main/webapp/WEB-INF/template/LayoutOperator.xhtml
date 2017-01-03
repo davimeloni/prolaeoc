@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title><ui:insert name="titulo">Sistema Badge</ui:insert></title>
+	<title><ui:insert name="titulo">Badge Interface</ui:insert></title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 
@@ -16,7 +16,7 @@
 		<h:form>
 			<h:graphicImage library="css" name="ibmwhite.png" />
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
-				Hi, #{operatorLogged.email} |
+				Hi, #{operatorLogged.name} |
 				<p:commandLink value="Logout" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
 					action="#{loginBean.deslogar}"/>
 			</div>

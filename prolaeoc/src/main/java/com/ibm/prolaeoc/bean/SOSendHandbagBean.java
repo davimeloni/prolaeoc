@@ -44,9 +44,14 @@ public class SOSendHandbagBean implements Serializable {
 	@PostConstruct
 	public void listToHandbag() {
 		this.badges = new DAO<Badge>(Badge.class).listHandbag(SOSendHandbagBean.location);
-	
+		
+	try {
 		long seq = Long.parseLong(new DAO<String>(String.class).lastHandbagNumber().substring(5)) + 1;
 		this.handbag.setHandbag_number("LAEOC" + String.format("%05d", seq));
+	} catch (Exception e) {
+		this.handbag.setHandbag_number("LAEOC00001");
+	}
+		
 	}
 	
 	//constructor

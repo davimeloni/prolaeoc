@@ -36,15 +36,23 @@ public class SORegisterBadgeBean {
 
 	@PostConstruct
 	public void generatePIN() {
-		this.badge.setPin(new DAO<Long>(Long.class).lastBadgeForPIN() + 1);
+		try {
+			this.badge.setPin(new DAO<Long>(Long.class).lastBadgeForPIN() + 1);
+		} catch (Exception e) {
+			this.badge.setPin(1);
+		}
+		
+		
 	}
 
 	public void save() {
 
+		
 		// Get current operator
 		FacesContext context = FacesContext.getCurrentInstance();
-		Operator operatorlogged = (Operator) context.getExternalContext().getSessionMap().get("operatorLogged");
-
+		Operator operatorlogged = new Operator();
+		operatorlogged = (Operator) context.getExternalContext().getSessionMap().get("operatorLogged");
+		
 		System.out.println("saving badge " + this.badge.getName());
 		this.badge.setUid(this.searchUID.toUpperCase());
 		this.badge.setStatus("Created");
@@ -56,6 +64,7 @@ public class SORegisterBadgeBean {
 			new DAO<Badge>(Badge.class).add(this.badge);
 
 			this.badge = new Badge();
+			this.searchUID = "";
 
 			generatePIN();
 

@@ -8,7 +8,7 @@ import com.ibm.prolaeoc.model.Operator;
 
 public class OperatorDAO {
 	
-public boolean exits(Operator operator) {
+public Operator exists(Operator operator) {
 		
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<Operator> query = em.createQuery(
@@ -20,13 +20,26 @@ public boolean exits(Operator operator) {
 		query.setParameter("pSenha", operator.getPassword());
 		try {
 			Operator result =  query.getSingleResult();
+			return result;
 		} catch (NoResultException ex) {
-			return false;
+			return null;
 		}finally {
 			em.close();
 		}		
-		return true;
+		
 	}
+
+//	public Operator getOperatorByEmail(String email) {
+//		Operator operator = new Operator();
+//		EntityManager em = new JPAUtil().getEntityManager();
+//		TypedQuery<Operator> query = em.createQuery(
+//				  " select u from Operator u "
+//				+ " where u.email = :pEmail", 
+//				Operator.class);
+//		query.setParameter("pEmail", email);
+//		
+//		return operator;
+//	}
 }
 
 

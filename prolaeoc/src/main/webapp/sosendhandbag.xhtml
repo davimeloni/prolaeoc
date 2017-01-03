@@ -75,7 +75,7 @@
 
 			<p:dialog id="dsp" header="LAEOC" widgetVar="display" modal="true"
 				showEffect="fade" hideEffect="fade" resizable="true">
-
+				
 				<p:outputLabel value="#{sendhandbagbean.hbForm}" />
 				<br />
 				<p:outputLabel value="#{sendhandbagbean.location}" />
@@ -85,9 +85,9 @@
 				<p:dataTable id="slist" var="badge"
 					value="#{sendhandbagbean.selectedBadges2}">
 
-					<!--  <f:facet name="header">
+					<f:facet name="header">
 						#{sendhandbagbean.hbForm} - #{sendhandbagbean.location} - #{sendhandbagbean.dateForm}
-					</f:facet>-->
+					</f:facet>
 
 					<!-- data columns here, working just fine -->
 					<p:column headerText="Serial" sortBy="{badge.uid}">
@@ -101,14 +101,14 @@
 					<p:column headerText="Received by other? Y/N" />
 					<p:column headerText="Activated" />
 				</p:dataTable>
-
+				
 				<p:separator />
 				<p:commandButton value="Print" type="button"
 					icon="ui-icon-print"
 					style="display:block;margin-bottom: 20px; text-align:center;"
 					
 					oncomplete="PF('display').hide()">
-					<p:printer target="dsp" />
+					<p:printer target="slist" />
 				</p:commandButton>
 
 			</p:dialog>

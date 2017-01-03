@@ -1,4 +1,4 @@
-package com.ibm.prolaeoc.bean;
+package com.ibm.prolaeoc;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,9 +33,15 @@ public class TesteGit {
 		Operator op = new Operator();
 
 		badge.setPin(1);
-		hb.setHandbag_number("LAEOC00001");
+//		hb.setHandbag_number("LAEOC00001");
+//		
+		op.setEmail("");
+		op.setEnabled(true);
+		op.setName("Admin Name");
+		op.setPassword("456");
+		op.setType("admin");
 		
-		new DAO<Handbag>(Handbag.class).add(hb);
+		new DAO<Operator>(Operator.class).add(op);
 	}
 
 }
