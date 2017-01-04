@@ -35,7 +35,7 @@ public class TesteGit {
 		badge.setPin(1);
 //		hb.setHandbag_number("LAEOC00001");
 //		
-		op.setEmail("");
+		op.setEmail("admin");
 		op.setEnabled(true);
 		op.setName("Admin Name");
 		op.setPassword("456");

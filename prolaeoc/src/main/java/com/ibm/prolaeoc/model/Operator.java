@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "OPERATOR" , schema="DMEZA")
+@Table(name = "OPERATOR" , schema="PROLAEOC")
 public class Operator implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -33,8 +34,8 @@ public class Operator implements Serializable {
 	private boolean enabled;
 	
 	
-	@OneToMany(mappedBy="operator")
-	 private List<Badge> badges = new ArrayList<Badge>();
+	//@OneToMany(mappedBy="operator_id")
+	//private List<Badge> badges = new ArrayList<Badge>();
 	
 	public long getId() {
 		return id;
@@ -73,12 +74,13 @@ public class Operator implements Serializable {
 		this.enabled = enabled;
 	}
 	
-	
+	/*
 	public List<Badge> getBadges() {
 		return badges;
 	}
 	public void addBadge(Badge badge) {
 		this.badges.add(badge);
 	}
+	*/
 
 }

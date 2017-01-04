@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
 import com.google.gson.Gson;
 
 @Entity
-@Table(name = "BADGE" , schema="DMEZA" )
+@Table(name = "BADGE" , schema="PROLAEOC" )
 public class Badge implements Serializable{
 	
 
@@ -38,9 +39,9 @@ public class Badge implements Serializable{
 	
 	private String handbag;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "operator_id")
-	private Operator operator;
+	@ManyToOne(optional = true,fetch=FetchType.LAZY)
+	//@JoinColumn(name = "operator_id")
+	private long operator_id;
 	
 	private String status;
 	
@@ -127,12 +128,12 @@ public class Badge implements Serializable{
 	}
 
 
-	public Operator getOperator() {
-		return operator;
+	public long getOperator() {
+		return operator_id;
 	}
 
-	public void setOperator(Operator operator) {
-		this.operator = operator;
+	public void setOperator(long operator) {
+		this.operator_id = operator;
 	}
 
 	public String getStatus() {

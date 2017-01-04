@@ -56,7 +56,7 @@ public class SORegisterBadgeBean {
 		System.out.println("saving badge " + this.badge.getName());
 		this.badge.setUid(this.searchUID.toUpperCase());
 		this.badge.setStatus("Created");
-		this.badge.setOperator(operatorlogged);
+		this.badge.setOperator(operatorlogged.getId());
 		this.badge.setCreation_date(actualDate);
 
 		if (!this.badge.getUid().isEmpty()) {
