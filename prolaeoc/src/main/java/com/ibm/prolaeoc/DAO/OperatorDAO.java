@@ -8,26 +8,30 @@ import com.ibm.prolaeoc.model.Operator;
 
 public class OperatorDAO {
 	
+
 public Operator exists(Operator operator) {
-		
-		EntityManager em = new JPAUtil().getEntityManager();
-		TypedQuery<Operator> query = em.createQuery(
-				  " select u from Operator u "
-				+ " where u.email = :pEmail and u.password = :pSenha", 
-				Operator.class);
-		
-		query.setParameter("pEmail", operator.getEmail());
-		query.setParameter("pSenha", operator.getPassword());
-		try {
-			Operator result =  query.getSingleResult();
-			return result;
-		} catch (NoResultException ex) {
-			return null;
-		}finally {
-			em.close();
-		}		
-		
-	}
+	
+	System.out.println("Entrou aqui .....");
+	
+	EntityManager em = new JPAUtil().getEntityManager();
+	TypedQuery<Operator> query = em.createQuery(
+			  " select u from Operator u "
+			+ " where u.email = :pEmail and u.password = :pSenha", 
+			Operator.class);
+	
+	query.setParameter("pEmail", operator.getEmail());
+	query.setParameter("pSenha", operator.getPassword());
+	try {
+				
+		Operator result =  query.getSingleResult();
+		return result;			
+	} catch (NoResultException ex) {			
+		return null;
+	} finally {
+		em.close();
+	}		
+	
+}
 
 //	public Operator getOperatorByEmail(String email) {
 //		Operator operator = new Operator();

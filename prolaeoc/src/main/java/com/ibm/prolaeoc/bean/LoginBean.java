@@ -50,12 +50,14 @@ public class LoginBean {
 				context.getExternalContext().getSessionMap().put("operatorLogged", this.operator);
 				return "soregisterbadge?faces-redirect=true";
 			}
+		} else {
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			context.addMessage(null, new FacesMessage("Attention, User not found!"));
+
+			return "login?faces-redirect=true";
 		}
 
-		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage("Operator not found!!"));
 
-		return "login?faces-redirect=true";
 	} 
 
 	public String deslogar() {

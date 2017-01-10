@@ -63,7 +63,7 @@ public class Badge implements Serializable{
 	private String imageUrl;
 	private String notesId;
 	
-	@SequenceGenerator(name="SEQ_LAEOCBADGE", allocationSize=1, initialValue=1,sequenceName="DMEZA.SEQ_LAEOCBADGE")
+	@SequenceGenerator(name="SEQ_LAEOCBADGE", allocationSize=1, initialValue=1,sequenceName="PROLAEOC.SEQ_LAEOCBADGE")
 	@Id @GeneratedValue(generator="SEQ_LAEOCBADGE", strategy=GenerationType.SEQUENCE)
 	public long getId() {
 		return id;

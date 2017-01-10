@@ -11,6 +11,8 @@ import org.hibernate.Query;
 
 import com.ibm.prolaeoc.model.Badge;
 
+
+
 public class DAO<T> {
 
 	private final Class<T> classe;
@@ -95,11 +97,25 @@ public class DAO<T> {
 		return (int) result;
 	}
 	
+	
+	
+	public static List<Object[]> listBadgesByOperator() {
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		
+		String jpql = "SELECT op.name, COUNT(b.id) as total FROM Badge b INNER JOIN Operator op ON (b.operator = op.id) GROUP BY op.name ORDER BY op.name ASC";
+				
+		TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
+		//query.setParameter("operatorID",operatorID);
+
+		return query.getResultList();
+	}
+	
 	public List<String> listCreated() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<String> query = em.createQuery("select location from Badge where status=:pstatus", String.class);
 		query.setParameter("pstatus", "Created");
-		
+		em.close();
 		return query.getResultList();
 	}
 	
@@ -108,7 +124,7 @@ public class DAO<T> {
 		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus and location=:plocation", Badge.class);
 		query.setParameter("pstatus", "Created");
 		query.setParameter("plocation", location);
-		
+		em.close();
 		return query.getResultList();
 	}
 	
@@ -118,21 +134,21 @@ public class DAO<T> {
 		TypedQuery<Badge> query = em.createQuery("from Badge where handbag=:phandbag and status=:pstatus ", Badge.class);
 		query.setParameter("phandbag", handbag);
 		query.setParameter("pstatus", "SentToReception");
-		
+		em.close();
 		return query.getResultList();
 	}
 
 	public Long lastBadgeForPIN() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		long result = (Long) em.createQuery("select pin from Badge ORDER by id DESC").setMaxResults(1).getSingleResult();
-		
+		em.close();
 		return result;
 	}
 	
 	public String lastHandbagNumber() {
 		EntityManager em = new JPAUtil().getEntityManager();
 		String result = (String) em.createQuery("select handbag_number from Handbag ORDER by id DESC").setMaxResults(1).getSingleResult();
-		
+		em.close();
 		return result;
 	}
 	
@@ -140,7 +156,7 @@ public class DAO<T> {
 		EntityManager em = new JPAUtil().getEntityManager();
 		TypedQuery<Badge> query = em.createQuery("from Badge where status=:pstatus", Badge.class);
 		query.setParameter("pstatus", "InReception");
-		
+		em.close();
 		return query.getResultList();
 		
 	}

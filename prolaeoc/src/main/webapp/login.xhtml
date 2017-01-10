@@ -3,7 +3,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Login</title>
+	<title>#{language['loginPageTitle']}</title>
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
@@ -17,8 +17,14 @@
 				<p:outputLabel value="Password" for="password" />
 				<p:password id="password" feedback="false"  required="true" size="20" value="#{loginBean.operator.password}" />
 				<p:outputLabel />
-				<p:commandButton value="Login" action="#{loginBean.doLogin}" />
+				<p:commandButton value="Login" action="#{loginBean.doLogin}">
+				</p:commandButton>
 			</h:panelGrid>
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage library="css" name="loading2.gif" />
+			</p:dialog>
+			
 		</h:form>
 	</div>
 </h:body>

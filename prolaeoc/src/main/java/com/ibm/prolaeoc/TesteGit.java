@@ -35,11 +35,11 @@ public class TesteGit {
 		badge.setPin(1);
 //		hb.setHandbag_number("LAEOC00001");
 //		
-		op.setEmail("admin");
+		op.setEmail("admin3");
 		op.setEnabled(true);
-		op.setName("Admin Name");
+		op.setName("Admin3 Name");
 		op.setPassword("456");
-		op.setType("admin");
+		op.setType("admin3");
 		
 		new DAO<Operator>(Operator.class).add(op);
 	}

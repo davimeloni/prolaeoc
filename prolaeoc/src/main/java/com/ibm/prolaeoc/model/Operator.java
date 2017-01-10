@@ -23,7 +23,7 @@ public class Operator implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@SequenceGenerator(name="SEQ_LAEOCOPERATOR",allocationSize=1, initialValue=1, sequenceName="DMEZA.SEQ_LAEOCOPERATOR")
+	@SequenceGenerator(name="SEQ_LAEOCOPERATOR",allocationSize=1, initialValue=1, sequenceName="PROLAEOC.SEQ_LAEOCOPERATOR")
 	@Id @GeneratedValue(generator="SEQ_LAEOCOPERATOR", strategy=GenerationType.SEQUENCE)
 	private long id;
 	private String name;

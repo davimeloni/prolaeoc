@@ -16,7 +16,7 @@
 		<h:form>
 			<h:graphicImage library="css" name="ibmwhite.png" />
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
-				Hi, #{operatorLogged.name} |
+				#{language['welcomeTitleOperator']}, #{operatorLogged.name} |
 				<p:commandLink value="Logout" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
 					action="#{loginBean.deslogar}"/>
 			</div>
@@ -46,6 +46,11 @@
 				<p:menuitem value="Send Handbag" icon="ui-icon-pencil"
 					action="/sosendhandbag?faces-redirect=true" />
 			</p:submenu>
+			<p:submenu label="Reports" icon="ui-icon-clipboard">
+				<p:menuitem value="Badge's by Operator" icon="ui-icon-search"
+					action="/reports?faces-redirect=true" />
+			</p:submenu>
+			
 		</p:menubar>
 	</h:form>
 

@@ -4,6 +4,21 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 
+
+	<application>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt_BR</supported-locale>
+			<supported-locale>en_US</supported-locale>
+		</locale-config>
+
+		<resource-bundle>
+			<base-name>internationalization.messages</base-name>
+			<var>language</var>
+		</resource-bundle>
+	</application>
+
+
 	<lifecycle>
 		<phase-listener>com.ibm.proalaeoc.utils.LoginListener</phase-listener>
 	</lifecycle>
