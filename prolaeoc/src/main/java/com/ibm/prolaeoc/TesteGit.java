@@ -35,13 +35,25 @@ public class TesteGit {
 		badge.setPin(1);
 //		hb.setHandbag_number("LAEOC00001");
 //		
-		op.setEmail("admin3");
+		op.setEmail("recepcionist");
 		op.setEnabled(true);
-		op.setName("Admin3 Name");
+		op.setName("Recepcionist Name");
 		op.setPassword("456");
-		op.setType("admin3");
+		op.setType("recepcionist");
 		
 		new DAO<Operator>(Operator.class).add(op);
+		
+//		List<Object[]> badges = DAO.listBadgesByStatus();
+//		
+//		double i = new DAO<Integer>(Integer.class).countAll();
+//		
+//		for (Object[] result : badges) {
+//			String status = (String) result[0];
+//			double percent = ((Number) result[1]).doubleValue()/i*100;
+//			//pie.set(status, percent);
+//			System.out.println(status + "  -  " + percent);
+//		}
+		
 	}
 
 }

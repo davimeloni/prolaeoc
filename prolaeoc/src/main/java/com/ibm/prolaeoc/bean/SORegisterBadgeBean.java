@@ -88,7 +88,7 @@ public class SORegisterBadgeBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			Client c = Client.create();
-			WebResource wr = c.resource("http://localhost:9080/BluePagesRESTFulAPI/bluepages/" + this.searchUID);
+			WebResource wr = c.resource("http://localhost:8080/BluePagesRESTFulAPI/bluepages/" + this.searchUID);
 			String json = wr.get(String.class);
 			Gson gson = new Gson();
 			// Badge badge = gson.fromJson(json, new TypeToken<Badge>() {

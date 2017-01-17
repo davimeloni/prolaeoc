@@ -34,7 +34,7 @@ public class REmployeeReceiveBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			this.badge = new DAO<Badge>(Badge.class).searchForSerial(this.serialString);
-			this.isReady = "Badge Ready to Active!";
+			this.isReady = "Badge Ready to Receive!";
 			
 		} catch (Exception e) {
 			System.out.println("badge not found or does not exist");
@@ -45,7 +45,7 @@ public class REmployeeReceiveBean {
 
 	public void activateBadge() {
 		System.out.println(this.badge.getLocation());
-		this.badge.setStatus("BadgeActive");
+		this.badge.setStatus("BadgeReceived");
 		this.badge.setReceived_date(actualDate);
 		this.badge.setActive(true);
 

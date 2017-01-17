@@ -48,7 +48,7 @@
 					id="location" filter="true" filterMatchMode="contains">
 					<f:selectItem itemLabel="Select location" noSelectionOption="true" />
 					<f:selectItems value="#{registerbadgebean.location}" var="location"
-						itemValue="#{location}" itemLabel="#{location.description}" />
+						itemValue="#{location.description}" itemLabel="#{location.description}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Work Location" for="work_location" />
@@ -56,7 +56,7 @@
 					id="work_location" filter="true" filterMatchMode="contains">
 					<f:selectItem itemLabel="Select location" noSelectionOption="true" />
 					<f:selectItems value="#{registerbadgebean.location}"
-						var="work_location" itemValue="#{location}"
+						var="location" itemValue="#{location.description}"
 						itemLabel="#{location.description}" />
 				</p:selectOneMenu>
 

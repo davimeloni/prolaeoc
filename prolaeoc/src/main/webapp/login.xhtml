@@ -10,14 +10,15 @@
 	<div id="login-dialog">
 		<h1>Login</h1>
 		<h:form id="frm">
-			<p:messages autoUpdate="true" />
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 			<h:panelGrid columns="2" styleClass="grid-login">
 				<p:outputLabel value="Email" for="email" />
 				<p:inputText id="email" required="true" size="20" value="#{loginBean.operator.email}" />
 				<p:outputLabel value="Password" for="password" />
 				<p:password id="password" feedback="false"  required="true" size="20" value="#{loginBean.operator.password}" />
 				<p:outputLabel />
-				<p:commandButton value="Login" action="#{loginBean.doLogin}">
+				<p:commandButton value="Login" action="#{loginBean.doLogin}" onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"  >
 				</p:commandButton>
 			</h:panelGrid>
 			<p:dialog widgetVar="statusDialog" modal="true" draggable="false"

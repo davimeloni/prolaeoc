@@ -18,30 +18,30 @@ import com.ibm.prolaeoc.model.Operator;
 public class LoginBean {
 
 	private Operator operator = new Operator();
-	
 
 	public Operator getOperator() {
 		return operator;
 	}
-	
+
 	public void setOperator(Operator operator) {
 		this.operator = operator;
 	}
 
-	public LoginBean () {
-		
+	public LoginBean() {
+
 	}
 
 	public String doLogin() {
 		System.out.println("###### doing the login for Operator " + this.operator.getEmail());
 
 		FacesContext context = FacesContext.getCurrentInstance();
-		this.operator = new OperatorDAO().exists(this.operator);
-		
-		if (this.operator.getEmail() != null) {
-			ExternalContext ec =context.getExternalContext();
-			HttpSession session = (HttpSession)ec.getSession(false);
-			session.setAttribute("operatorLogged",this.operator);
+		try {
+			this.operator = new OperatorDAO().exists(this.operator);
+
+			// if (this.operator.getEmail() != null) {
+			ExternalContext ec = context.getExternalContext();
+			HttpSession session = (HttpSession) ec.getSession(false);
+			session.setAttribute("operatorLogged", this.operator);
 
 			if ("recepcionist".equals(this.operator.getType())) {
 				context.getExternalContext().getSessionMap().put("operatorLogged", this.operator);
@@ -50,23 +50,22 @@ public class LoginBean {
 				context.getExternalContext().getSessionMap().put("operatorLogged", this.operator);
 				return "soregisterbadge?faces-redirect=true";
 			}
-		} else {
+			// }
+
+		} catch (Exception e) {
 			context.getExternalContext().getFlash().setKeepMessages(true);
-			context.addMessage(null, new FacesMessage("Attention, User not found!"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User not found!", "Error!"));
 
 			return "login?faces-redirect=true";
 		}
 
-
-	} 
+	}
 
 	public String deslogar() {
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
-	    context.getExternalContext().getSessionMap().remove("operatorLogged");
-	    return "login?faces-redirect=true";	
+		context.getExternalContext().getSessionMap().remove("operatorLogged");
+		return "login?faces-redirect=true";
 	}
-	
-	
 
 }

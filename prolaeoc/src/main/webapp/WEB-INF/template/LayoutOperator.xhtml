@@ -17,8 +17,9 @@
 			<h:graphicImage library="css" name="ibmwhite.png" />
 			<div style="float: right; margin-right: 20px; margin-top: 8px">
 				#{language['welcomeTitleOperator']}, #{operatorLogged.name} |
-				<p:commandLink value="Logout" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
-					action="#{loginBean.deslogar}"/>
+				<p:commandLink value="Logout"
+					styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+					action="#{loginBean.deslogar}" />
 			</div>
 		</h:form>
 	</header>
@@ -34,11 +35,11 @@
 
 	<h:form>
 		<p:menubar style="margin-top: -20px; margin-bottom: 20px">
-			<p:submenu label="Badges" icon="ui-icon-contact" >
+			<p:submenu label="Badges" icon="ui-icon-contact">
 				<p:menuitem value="Register Badge" icon="ui-icon-person"
 					action="/soregisterbadge?faces-redirect=true" />
-					<p:menuitem value="Badge Report" icon="ui-icon-search"
-					action="/reportstatusbadge?faces-redirect=true" />
+				<p:menuitem value="Badge Status" icon="ui-icon-search"
+					action="/statusbadge?faces-redirect=true" />
 			</p:submenu>
 			<p:submenu label="Handbag" icon="ui-icon-document">
 				<p:menuitem value="Select Location" icon="ui-icon-search"
@@ -48,9 +49,9 @@
 			</p:submenu>
 			<p:submenu label="Reports" icon="ui-icon-clipboard">
 				<p:menuitem value="Badge's by Operator" icon="ui-icon-search"
-					action="/reports?faces-redirect=true" />
+					action="/badgesbyoperator?faces-redirect=true" />
 			</p:submenu>
-			
+
 		</p:menubar>
 	</h:form>
 
