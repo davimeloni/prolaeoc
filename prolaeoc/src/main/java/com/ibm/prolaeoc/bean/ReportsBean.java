@@ -63,11 +63,15 @@ public class ReportsBean {
 		List<Object[]> badges = DAO.listBadgesByStatus();
 		
 		pie.setLegendPosition("w");
+		pie.setShowDataLabels(true);
+		pie.setFill(false);
+		pie.setDataFormat("value");
 
 		for (Object[] result : badges) {
 			String status = (String) result[0];
-			int count = ((Number) result[1]).intValue();
-			pie.set(status, count);
+			int number = ((Number) result[1]).intValue();
+			pie.set(status, number);
+			System.out.println(status + "  -  " + number);
 		}
 
 		return pie;

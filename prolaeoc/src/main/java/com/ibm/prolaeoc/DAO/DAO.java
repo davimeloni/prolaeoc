@@ -109,8 +109,8 @@ public class DAO<T> {
 
 		EntityManager em = new JPAUtil().getEntityManager();
 
-		String jpql = "SELECT b.status, COUNT(b.id) as total FROM Badge b"
-				+ "GROUP BY b.status ORDER BY b.status ASC";
+		String jpql = "SELECT status, COUNT(status) from Badge "
+				+ "GROUP BY status ORDER BY status ASC";
 
 		TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
 		// query.setParameter("operatorID",operatorID);
