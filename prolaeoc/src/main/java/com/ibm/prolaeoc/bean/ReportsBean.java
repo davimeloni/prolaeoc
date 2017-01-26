@@ -77,4 +77,13 @@ public class ReportsBean {
 		return pie;
 
 	}
+	
+	public long getTotalBadges() {
+		
+		long total = new DAO<Long>(Long.class).countAll();
+		
+		return total;
+	}
+	
+	
 }

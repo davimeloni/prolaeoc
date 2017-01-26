@@ -13,7 +13,12 @@
 		<p:outputPanel style="align:center">Amount of Badge's per Status</p:outputPanel>
 		<p:chart type="pie" model="#{reportsBean.badgesByStatus}"
 			style="width:400px;height:300px" />
-		 </ui:define>
+			
+		<p:separator/>
+			
+		<p:outputLabel id="totalBadges" value="Total Amount of Badges: " />
+		<h:outputText value="#{reportsBean.totalBadges}" />
+	</ui:define>
 
 
 

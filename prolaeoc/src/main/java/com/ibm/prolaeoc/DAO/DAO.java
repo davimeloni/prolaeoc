@@ -85,9 +85,9 @@ public class DAO<T> {
 		return query.getSingleResult();
 	}
 
-	public Integer countAll() {
+	public Long countAll() {
 		EntityManager em = new JPAUtil().getEntityManager();
-		Integer result = (Integer) em.createQuery("select count(n) from Badge n").getSingleResult();
+		Long result = (Long) em.createQuery("select count(n) from Badge n").getSingleResult();
 		em.close();
 
 		return result;

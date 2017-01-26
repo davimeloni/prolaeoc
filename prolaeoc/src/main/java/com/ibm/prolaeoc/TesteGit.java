@@ -43,16 +43,20 @@ public class TesteGit {
 //		
 //		new DAO<Operator>(Operator.class).add(op);
 		
-		List<Object[]> badges = DAO.listBadgesByStatus();
+//		List<Object[]> badges = DAO.listBadgesByStatus();
+//		
+//		//double i = new DAO<Integer>(Integer.class).countAll();
+//		
+//		for (Object[] result : badges) {
+//			String status = (String) result[0];
+//			int percent = ((Number) result[1]).intValue();
+//			//pie.set(status, percent);
+//			System.out.println(status + "  -  " + percent);
+//		}
 		
-		//double i = new DAO<Integer>(Integer.class).countAll();
+		long total = new DAO<Long>(Long.class).countAll();
 		
-		for (Object[] result : badges) {
-			String status = (String) result[0];
-			int percent = ((Number) result[1]).intValue();
-			//pie.set(status, percent);
-			System.out.println(status + "  -  " + percent);
-		}
+		System.out.println(total);
 		
 	}
 
